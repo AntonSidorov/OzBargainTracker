@@ -1,5 +1,6 @@
 <Settings>
   <Email>OzBargainTracker@gmail.com</Email>
+  <Subject>Deals at OzBargain</Subject>
   <Password>TrackOzBargain</Password>
   <Port>587</Port>
   <SMTPHost>smtp.gmail.com</SMTPHost>

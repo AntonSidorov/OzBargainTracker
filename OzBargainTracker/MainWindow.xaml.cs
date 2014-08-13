@@ -36,10 +36,10 @@ namespace OzBargainTracker
         XmlDocument Settings;
         DispatcherTimer UpdateTimer, OneSecTimer;
         bool isRunning = false, Advanced = false, OzBargainFetched = false, ToCheck = true, isInitialized = false, ShowTime = false;
-        string Email = "", Password = "", Website = "", SMTPHost = "", Mode = "";
+        string Email = "", Password = "", Website = "", SMTPHost = "smtp.gmail.com", Mode = "", EmailSubject = "Deals at OzBargain";
         DataSet SettingsDS = new DataSet();
         List<User> Users = new List<User>();
-        int Interval = 0, Port = 0;
+        int Interval = 0, Port = 587;
         enum LogMessageType
         {
             DebugLog = 0,
@@ -239,6 +239,9 @@ namespace OzBargainTracker
                     case"ShowTimeInLog":
                         ShowTime = bool.Parse(Node.InnerText);
                         break;
+                    case "Subject":
+                        EmailSubject = Node.InnerText;
+                        break;
                     default:
                         Log("Unknown Node detected in Settings.xml: " + Node.Name, LogMessageType.DebugLog);
                         break;
@@ -266,29 +269,25 @@ namespace OzBargainTracker
             try
             {
                 Log("Trying to send an email to " + ToUser.Email, LogMessageType.DebugLog);
-                string Subject = "", Body = "";
+                string Body = "", Subject = EmailSubject; //2Add: Add the tags that trigged this email
                 foreach (OzBargainSaleItem Item in ToUser.DealsForUser)
+                {
                     Body += "\r\n" + Item.Title + "\r\n" + Item.Url + "\r\n";
-
-                Subject = "Deals at OzBargain "; //2Add: Add the tags that trigged this email
-
+                    foreach (string Tag in ToUser.Tags)
+                        if (Item.Title.Contains(Tag))
+                            Subject += "[" + Tag + ']';
+                }
                 MailMessage Msg = new MailMessage();
                 Msg.To.Add(ToUser.Email);
                 MailAddress Address = new MailAddress(Email);
                 Msg.From = Address;
                 Msg.Subject = Subject;
 
-                string _Host = "smtp.gmail.com";
-                if (SMTPHost != "")
-                    _Host = SMTPHost;
-                int _Port = 587;
-                if (Port != 0)
-                    _Port = Port;
 
                 var smtp = new SmtpClient   //2Add : Load most of the details from the settings file
                 {
-                    Host = _Host,
-                    Port = _Port,
+                    Host = SMTPHost,
+                    Port = Port,
                     EnableSsl = true,
                     DeliveryMethod = SmtpDeliveryMethod.Network,
                     UseDefaultCredentials = false,
