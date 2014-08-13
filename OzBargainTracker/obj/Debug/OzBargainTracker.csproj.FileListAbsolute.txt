@@ -1,0 +1,31 @@
+d:\documents\visual studio 2013\Projects\OzBargainTracker\OzBargainTracker\bin\Debug\OzBargainTracker.exe.config
+d:\documents\visual studio 2013\Projects\OzBargainTracker\OzBargainTracker\bin\Debug\OzBargainTracker.exe
+d:\documents\visual studio 2013\Projects\OzBargainTracker\OzBargainTracker\bin\Debug\OzBargainTracker.pdb
+d:\documents\visual studio 2013\Projects\OzBargainTracker\OzBargainTracker\bin\Debug\MahApps.Metro.dll
+d:\documents\visual studio 2013\Projects\OzBargainTracker\OzBargainTracker\bin\Debug\System.Windows.Interactivity.dll
+d:\documents\visual studio 2013\Projects\OzBargainTracker\OzBargainTracker\bin\Debug\MahApps.Metro.pdb
+d:\documents\visual studio 2013\Projects\OzBargainTracker\OzBargainTracker\bin\Debug\MahApps.Metro.xml
+d:\documents\visual studio 2013\Projects\OzBargainTracker\OzBargainTracker\obj\Debug\OzBargainTracker.csprojResolveAssemblyReference.cache
+d:\documents\visual studio 2013\Projects\OzBargainTracker\OzBargainTracker\obj\Debug\MainWindow.baml
+d:\documents\visual studio 2013\Projects\OzBargainTracker\OzBargainTracker\obj\Debug\App.baml
+d:\documents\visual studio 2013\Projects\OzBargainTracker\OzBargainTracker\obj\Debug\MainWindow.g.cs
+d:\documents\visual studio 2013\Projects\OzBargainTracker\OzBargainTracker\obj\Debug\App.g.cs
+d:\documents\visual studio 2013\Projects\OzBargainTracker\OzBargainTracker\obj\Debug\OzBargainTracker_MarkupCompile.cache
+d:\documents\visual studio 2013\Projects\OzBargainTracker\OzBargainTracker\obj\Debug\OzBargainTracker.g.resources
+d:\documents\visual studio 2013\Projects\OzBargainTracker\OzBargainTracker\obj\Debug\OzBargainTracker.Properties.Resources.resources
+d:\documents\visual studio 2013\Projects\OzBargainTracker\OzBargainTracker\obj\Debug\OzBargainTracker.csproj.GenerateResource.Cache
+d:\documents\visual studio 2013\Projects\OzBargainTracker\OzBargainTracker\obj\Debug\OzBargainTracker.exe
+d:\documents\visual studio 2013\Projects\OzBargainTracker\OzBargainTracker\obj\Debug\OzBargainTracker.pdb
+d:\documents\visual studio 2013\Projects\OzBargainTracker\OzBargainTracker\bin\Debug\de\System.Windows.Interactivity.resources.dll
+d:\documents\visual studio 2013\Projects\OzBargainTracker\OzBargainTracker\bin\Debug\en\System.Windows.Interactivity.resources.dll
+d:\documents\visual studio 2013\Projects\OzBargainTracker\OzBargainTracker\bin\Debug\es\System.Windows.Interactivity.resources.dll
+d:\documents\visual studio 2013\Projects\OzBargainTracker\OzBargainTracker\bin\Debug\fr\System.Windows.Interactivity.resources.dll
+d:\documents\visual studio 2013\Projects\OzBargainTracker\OzBargainTracker\bin\Debug\it\System.Windows.Interactivity.resources.dll
+d:\documents\visual studio 2013\Projects\OzBargainTracker\OzBargainTracker\bin\Debug\ja\System.Windows.Interactivity.resources.dll
+d:\documents\visual studio 2013\Projects\OzBargainTracker\OzBargainTracker\bin\Debug\ko\System.Windows.Interactivity.resources.dll
+d:\documents\visual studio 2013\Projects\OzBargainTracker\OzBargainTracker\bin\Debug\ru\System.Windows.Interactivity.resources.dll
+d:\documents\visual studio 2013\Projects\OzBargainTracker\OzBargainTracker\bin\Debug\zh-Hans\System.Windows.Interactivity.resources.dll
+d:\documents\visual studio 2013\Projects\OzBargainTracker\OzBargainTracker\bin\Debug\zh-Hant\System.Windows.Interactivity.resources.dll
+D:\GitHub\OzBargainTracker\OzBargainTracker\bin\Debug\OzBargainTracker.exe.config
+D:\GitHub\OzBargainTracker\OzBargainTracker\obj\Debug\OzBargainTracker.exe
+D:\GitHub\OzBargainTracker\OzBargainTracker\obj\Debug\OzBargainTracker.pdb
