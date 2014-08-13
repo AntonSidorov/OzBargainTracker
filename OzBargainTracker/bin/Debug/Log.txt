@@ -1,15 +1,8 @@
-[Debug] Init Begin
-[Debug] Init End
-[Debug] Get Settings begin
-[Debug] Get Settings end
-[Info] Started up 
-[Debug] OzBargain fetched
-[Debug] Loading accounts...
-[Debug] Loaded account: ToxaHD@gmail.com  Tags:  [Paid]  [ios]  [Course]  [Udemy]  [ipad]  [iphone]  [ipod] 
-[Debug] Loaded account: Lets see  Tags: 
-[Debug] Accounts loaded
-[Debug] OzBargain fetched
-[Debug] Loading accounts...
-[Debug] Loaded account: ToxaHD@gmail.com  Tags:  [Paid]  [ios]  [Course]  [Udemy]  [ipad]  [iphone]  [ipod] 
-[Debug] Loaded account: Lets see  Tags: 
-[Debug] Accounts loaded
+[13/08/2014 9:23:14 PM] [Debug] Settings Loaded
+[13/08/2014 9:23:14 PM] [Info] Started up 
+[13/08/2014 9:23:14 PM] [Debug] Started Fetching OzBargain...
+[13/08/2014 9:23:17 PM] [Debug] OzBargain fetched
+[13/08/2014 9:23:17 PM] [Debug] Loading accounts...
+[13/08/2014 9:23:17 PM] [Debug] Loaded account: ToxaHD@gmail.com  Tags:  [Paid]  [ios]  [Course]  [Udemy]  [ipad]  [iphone]  [ipod] 
+[13/08/2014 9:23:17 PM] [Debug] Loaded account: Lets see  Tags: 
+[13/08/2014 9:23:17 PM] [Debug] Accounts loaded

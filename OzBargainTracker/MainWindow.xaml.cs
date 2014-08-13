@@ -32,13 +32,14 @@ namespace OzBargainTracker
     public partial class MainWindow : MetroWindow
     {
         BackgroundWorker WebsiteWorker = new BackgroundWorker();
-        XmlReader Settings, OzBargain;
+        XmlReader Accounts, OzBargain;
+        XmlDocument Settings;
         DispatcherTimer UpdateTimer, OneSecTimer;
-        bool isRunning = false, Advanced = false, OzBargainFetched = false, ToCheck = true, isInitialized = false;
-        string Email = "", Password = "", Website = "";
+        bool isRunning = false, Advanced = false, OzBargainFetched = false, ToCheck = true, isInitialized = false, ShowTime = false;
+        string Email = "", Password = "", Website = "", SMTPHost = "", Mode = "";
         DataSet SettingsDS = new DataSet();
         List<User> Users = new List<User>();
-        int Interval = 0;
+        int Interval = 0, Port = 0;
         enum LogMessageType
         {
             DebugLog = 0,
@@ -53,6 +54,8 @@ namespace OzBargainTracker
             //Initialization of variables and UI
             InitializeComponent();
             Log("Init Begin", LogMessageType.DebugLog);
+
+            Settings = new XmlDocument();
 
             OneSecTimer = new DispatcherTimer();    //A timer for steps in the time left progressbar
             OneSecTimer.Tick += OneSecTimer_Tick;   //with an interval of 1 second
@@ -74,6 +77,7 @@ namespace OzBargainTracker
             GetSettings();
 
             Log("Started up ", LogMessageType.Info);
+            Log("Started Fetching OzBargain...", LogMessageType.DebugLog);
             WebsiteWorker.RunWorkerAsync();
             isInitialized = true;
         }
@@ -91,7 +95,6 @@ namespace OzBargainTracker
 
         void WebsiteWorker_DoWork(object sender, DoWorkEventArgs e)
         {
-            Log("")
             WebClient client = new WebClient();
             OzBargain = XmlReader.Create(Website);
         }
@@ -103,7 +106,7 @@ namespace OzBargainTracker
             Checker();
         }
 
-        async void Checker()
+        void Checker()
         {
             OzBargainFetched = false;
             StreamReader Reader = new StreamReader(Stuff.MyStartupLocation() + @"\LastDeal.txt");
@@ -121,7 +124,7 @@ namespace OzBargainTracker
             {
                 if (i.Links[0].Uri.ToString().ToUpper() == LastDeal.ToUpper())
                     Repeated = true;    //trigger
-                else
+                if (i.Links[0].Uri.ToString().ToUpper() != LastDeal.ToUpper() && !Repeated)
                 {
                     OzBargainSaleItem Item = new OzBargainSaleItem(i.Title.Text, i.Links[0].Uri.ToString());
                     Items.Add(Item);
@@ -161,7 +164,6 @@ namespace OzBargainTracker
 
         void Log(string LogMessage, LogMessageType MsgType)
         {
-            bool ShowTime = false;
             Paragraph Msg = new Paragraph();
             Msg.LineHeight = 0.5;
             string Message = LogMessage;
@@ -192,7 +194,10 @@ namespace OzBargainTracker
             if (ShowTime)
                 Message = string.Format("[{0}] {1}", DateTime.Now, Message);
             Msg.Inlines.Add(Message);
-            Log_box.Document.Blocks.Add(Msg);
+            if (MsgType == LogMessageType.DebugLog && Mode != "Debug")
+            { }
+            else
+                Log_box.Document.Blocks.Add(Msg);
 
             StreamWriter Writer = new StreamWriter(Stuff.MyStartupLocation() + @"\Log.txt");
             TextRange Text = new TextRange(Log_box.Document.ContentStart, Log_box.Document.ContentEnd);
@@ -202,28 +207,57 @@ namespace OzBargainTracker
 
         void GetSettings()
         {       //2Add: Make the settings file an xml
-            Log("Get Settings begin", LogMessageType.DebugLog);
-            StreamReader Reader = new StreamReader(Stuff.MyStartupLocation() + @"\Settings.txt");
-            Email = Reader.ReadLine();
-            Password = Reader.ReadLine();
-            Interval = int.Parse(Reader.ReadLine());
-            Website = Reader.ReadLine();
+            Log("Loading Settings...", LogMessageType.DebugLog);
+
+            Settings.Load(Stuff.MyStartupLocation() + @"\Settings.xml");
+
+            foreach (XmlNode Node in Settings.DocumentElement.ChildNodes)
+            {
+                switch (Node.Name)
+                {
+                    case "Email":
+                        Email = Node.InnerText;
+                        break;
+                    case "Password":
+                        Password = Node.InnerText;
+                        break;
+                    case "Port":
+                        Port = int.Parse(Node.InnerText);
+                        break;
+                    case "SMTPHost":
+                        SMTPHost = Node.InnerText;
+                        break;
+                    case "Website":
+                        Website = Node.InnerText;
+                        break;
+                    case "Interval":
+                        Interval = int.Parse(Node.InnerText);
+                        break;
+                    case "Mode":
+                        Mode = Node.InnerText;
+                        break;
+                    case"ShowTimeInLog":
+                        ShowTime = bool.Parse(Node.InnerText);
+                        break;
+                    default:
+                        Log("Unknown Node detected in Settings.xml: " + Node.Name, LogMessageType.DebugLog);
+                        break;
+                }
+            }
             TimeLeftPBar.Maximum = Interval;
             UpdateTimer.Interval = TimeSpan.FromSeconds(Interval);
             RefreshRateNUD.Value = Interval;
-            Log("Get Settings end", LogMessageType.DebugLog);
+            Log("Settings Loaded", LogMessageType.DebugLog);
         }
 
         void SaveSettings()
         {
             if (isInitialized)
             {
-                StreamWriter writer = new StreamWriter(Stuff.MyStartupLocation() + @"\Settings.txt");
-                writer.WriteLine(Email);
-                writer.WriteLine(Password);
-                writer.WriteLine(Interval);
-                writer.WriteLine(Website);
-                writer.Close();
+                foreach (XmlNode Child in Settings.ChildNodes)
+                    if (Child.Name == "Interval")
+                        Child.Value = Interval.ToString();
+                Settings.Save(Stuff.MyStartupLocation() + @"\Settings.xml");
             }
         }
 
@@ -244,10 +278,17 @@ namespace OzBargainTracker
                 Msg.From = Address;
                 Msg.Subject = Subject;
 
+                string _Host = "smtp.gmail.com";
+                if (SMTPHost != "")
+                    _Host = SMTPHost;
+                int _Port = 587;
+                if (Port != 0)
+                    _Port = Port;
+
                 var smtp = new SmtpClient   //2Add : Load most of the details from the settings file
                 {
-                    Host = "smtp.gmail.com",
-                    Port = 587,
+                    Host = _Host,
+                    Port = _Port,
                     EnableSsl = true,
                     DeliveryMethod = SmtpDeliveryMethod.Network,
                     UseDefaultCredentials = false,
@@ -270,9 +311,9 @@ namespace OzBargainTracker
             Log("Loading accounts...", LogMessageType.DebugLog);
             XmlDocument Doc = new XmlDocument();
             Doc.Load(Stuff.MyStartupLocation() + @"\Accounts.xml");
-            Settings = XmlReader.Create(Stuff.MyStartupLocation() + @"\Accounts.xml", new XmlReaderSettings());
-            Settings.Read();
-            SettingsDS.ReadXml(Settings);
+            Accounts = XmlReader.Create(Stuff.MyStartupLocation() + @"\Accounts.xml", new XmlReaderSettings());
+            Accounts.Read();
+            SettingsDS.ReadXml(Accounts);
             SettingsDataGrid.ItemsSource = SettingsDS.Tables[0].DefaultView;
             foreach (XmlNode Node in Doc.DocumentElement)
             {
@@ -316,6 +357,7 @@ namespace OzBargainTracker
                 TimeLeftPBar.Value++;
                 if (TimeLeftPBar.Value == TimeLeftPBar.Maximum - 8)
                 {
+                    Log("Started Fetching OzBargain...", LogMessageType.DebugLog);
                     WebsiteWorker.RunWorkerAsync();
                 }
             }
@@ -336,7 +378,7 @@ namespace OzBargainTracker
 
         private void Button_Click(object sender, RoutedEventArgs e) //Update Account Info
         {
-            Settings.Close();
+            Accounts.Close();
             try
             {
                 SettingsDS.WriteXml(Stuff.MyStartupLocation() + @"\Accounts.xml");
