@@ -74,7 +74,7 @@ namespace OzBargainTracker
             //End init
             Log("Init End", LogMessageType.DebugLog);
             //Initialization of data
-            GetSettings();
+            LoadSettings();
 
             Log("Started up ", LogMessageType.Info);
             Log("Started Fetching OzBargain...", LogMessageType.DebugLog);
@@ -205,8 +205,8 @@ namespace OzBargainTracker
             Writer.Close();
         }
 
-        void GetSettings()
-        {       //2Add: Make the settings file an xml
+        void LoadSettings()
+        {
             Log("Loading Settings...", LogMessageType.DebugLog);
 
             Settings.Load(Stuff.MyStartupLocation() + @"\Settings.xml");
@@ -266,6 +266,7 @@ namespace OzBargainTracker
 
         void SendEmail(User ToUser)
         {
+            
             try
             {
                 Log("Trying to send an email to " + ToUser.Email, LogMessageType.DebugLog);
