@@ -1,8 +1,8 @@
-[13/08/2014 9:23:14 PM] [Debug] Settings Loaded
-[13/08/2014 9:23:14 PM] [Info] Started up 
-[13/08/2014 9:23:14 PM] [Debug] Started Fetching OzBargain...
-[13/08/2014 9:23:17 PM] [Debug] OzBargain fetched
-[13/08/2014 9:23:17 PM] [Debug] Loading accounts...
-[13/08/2014 9:23:17 PM] [Debug] Loaded account: ToxaHD@gmail.com  Tags:  [Paid]  [ios]  [Course]  [Udemy]  [ipad]  [iphone]  [ipod] 
-[13/08/2014 9:23:17 PM] [Debug] Loaded account: Lets see  Tags: 
-[13/08/2014 9:23:17 PM] [Debug] Accounts loaded
+[14/08/2014 7:11:26 PM] [Debug] Settings Loaded
+[14/08/2014 7:11:26 PM] [Info] Started up 
+[14/08/2014 7:11:27 PM] [Debug] Started Fetching OzBargain...
+[14/08/2014 7:11:34 PM] [Debug] OzBargain fetched
+[14/08/2014 7:11:34 PM] [Debug] Loading accounts...
+[14/08/2014 7:11:34 PM] [Debug] Loaded account: ToxaHD@gmail.com  Tags: Paid ios Course Udemy ipad iphone ipod
+[14/08/2014 7:11:34 PM] [Debug] Loaded account: Lets see  Tags: 
+[14/08/2014 7:11:34 PM] [Debug] Accounts loaded

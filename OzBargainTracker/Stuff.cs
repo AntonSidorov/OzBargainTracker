@@ -33,7 +33,12 @@ namespace OzBargainTracker
 
         public User(string email, string[] tags)
         {
-            Email = email; Tags = tags;
+            Email = email;
+
+            string[] Tgas = tags;
+            foreach (string Tag in Tags)
+                Tag.Replace("_", " ");
+
         }
     }
 

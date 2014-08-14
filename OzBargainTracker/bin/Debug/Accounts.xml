@@ -2,17 +2,6 @@
 <Accounts xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <Account>
     <Email>ToxaHD@gmail.com</Email>
-    <Tags>
-      <Tag>Paid</Tag>
-      <Tag>ios</Tag>
-      <Tag>Course</Tag>
-      <Tag>Udemy</Tag>
-      <Tag>ipad</Tag>
-      <Tag>iphone</Tag>
-      <Tag>ipod</Tag>
-    </Tags>
-  </Account>
-  <Account>
-    <Email>Lets see</Email>
+    <Tags>Paid ios Course Udemy ipad iphone ipod</Tags>
   </Account>
 </Accounts>

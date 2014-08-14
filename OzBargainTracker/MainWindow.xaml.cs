@@ -37,7 +37,7 @@ namespace OzBargainTracker
         DispatcherTimer UpdateTimer, OneSecTimer;
         bool isRunning = false, Advanced = false, OzBargainFetched = false, ToCheck = true, isInitialized = false, ShowTime = false;
         string Email = "", Password = "", Website = "", SMTPHost = "smtp.gmail.com", Mode = "", EmailSubject = "Deals at OzBargain";
-        DataSet SettingsDS = new DataSet();
+        DataSet AccountsDS = new DataSet();
         List<User> Users = new List<User>();
         int Interval = 0, Port = 587;
         enum LogMessageType
@@ -77,7 +77,6 @@ namespace OzBargainTracker
             LoadSettings();
 
             Log("Started up ", LogMessageType.Info);
-            Log("Started Fetching OzBargain...", LogMessageType.DebugLog);
             WebsiteWorker.RunWorkerAsync();
             isInitialized = true;
         }
@@ -95,14 +94,30 @@ namespace OzBargainTracker
 
         void WebsiteWorker_DoWork(object sender, DoWorkEventArgs e)
         {
-            WebClient client = new WebClient();
-            OzBargain = XmlReader.Create(Website);
+            this.Dispatcher.Invoke(DispatcherPriority.Normal,
+                new Action(() =>
+                {
+                    Log("Started Fetching OzBargain...", LogMessageType.DebugLog);
+                }));
+            try
+            {
+                OzBargain = XmlReader.Create(Website);
+            }
+            catch (Exception ex)
+            {
+                this.Dispatcher.Invoke(DispatcherPriority.Normal,
+                                new Action(() =>
+                                {
+                                    Log("Unable to fetch OzBargain", LogMessageType.Error);
+                                }));
+            }
+
         }
 
         void Main()
         {
-            SettingsDS.Reset();
-            GetAccounts();
+            AccountsDS.Reset();
+            LoadAccounts();
             Checker();
         }
 
@@ -115,7 +130,7 @@ namespace OzBargainTracker
             if (LastDeal == null)                   // So that it wont send random emails
                 LastDeal = " BlahBlahBlah";
 
-            bool Repeated = false; // becomes true when the lastdeal item is reached, so that there are not duplicates
+            bool Repeated = false; // becomes true when the lastdeal item is reached, so that there are no duplicates
 
             var reader = OzBargain;
             var feed = SyndicationFeed.Load(reader);
@@ -236,7 +251,7 @@ namespace OzBargainTracker
                     case "Mode":
                         Mode = Node.InnerText;
                         break;
-                    case"ShowTimeInLog":
+                    case "ShowTimeInLog":
                         ShowTime = bool.Parse(Node.InnerText);
                         break;
                     case "Subject":
@@ -256,17 +271,18 @@ namespace OzBargainTracker
         void SaveSettings()
         {
             if (isInitialized)
-            {
+            {/*
                 foreach (XmlNode Child in Settings.ChildNodes)
                     if (Child.Name == "Interval")
                         Child.Value = Interval.ToString();
                 Settings.Save(Stuff.MyStartupLocation() + @"\Settings.xml");
+              */
             }
         }
 
         void SendEmail(User ToUser)
         {
-            
+            LoadSettings();
             try
             {
                 Log("Trying to send an email to " + ToUser.Email, LogMessageType.DebugLog);
@@ -283,7 +299,7 @@ namespace OzBargainTracker
                 MailAddress Address = new MailAddress(Email);
                 Msg.From = Address;
                 Msg.Subject = Subject;
-
+                Msg.Body = Body;
 
                 var smtp = new SmtpClient   //2Add : Load most of the details from the settings file
                 {
@@ -306,21 +322,21 @@ namespace OzBargainTracker
                 Log("Unable to send an email", LogMessageType.Error);
             }
         }
-        void GetAccounts()
+        void LoadAccounts()
         {
             Log("Loading accounts...", LogMessageType.DebugLog);
             XmlDocument Doc = new XmlDocument();
             Doc.Load(Stuff.MyStartupLocation() + @"\Accounts.xml");
             Accounts = XmlReader.Create(Stuff.MyStartupLocation() + @"\Accounts.xml", new XmlReaderSettings());
             Accounts.Read();
-            SettingsDS.ReadXml(Accounts);
-            SettingsDataGrid.ItemsSource = SettingsDS.Tables[0].DefaultView;
+            AccountsDS.ReadXml(Accounts);
+            AccountsDataGrid.ItemsSource = AccountsDS.Tables[0].DefaultView;
             foreach (XmlNode Node in Doc.DocumentElement)
             {
                 if (Node.Name == "Account")
                 {
                     string Email = "";
-                    List<string> Tags = new List<string>();
+                    string TagsLoaded = "";
                     foreach (XmlNode Child in Node.ChildNodes)
                     {
                         switch (Child.Name)
@@ -332,18 +348,14 @@ namespace OzBargainTracker
                                 Log("Something Weird happened", LogMessageType.Warning);
                                 break;
                             case "Tags":
-                                foreach (XmlNode SuperChild in Child.ChildNodes)
-                                {
-                                    Tags.Add(SuperChild.InnerText);
-                                }
+                                TagsLoaded = Child.InnerText;
                                 break;
                         }
                     }
-                    string TagsLoaded = "";
-                    foreach (string Tag in Tags)
-                        TagsLoaded += " [" + Tag + "] ";
+                    string[] Splitter =  {" "};
+                    string[] Tags = TagsLoaded.Split(Splitter, StringSplitOptions.None);
                     Log("Loaded account: " + Email + "  Tags: " + TagsLoaded, LogMessageType.DebugLog);
-                    User user = new User(Email, Tags.ToArray());
+                    User user = new User(Email, Tags);
                     Users.Add(user);
                 }
             }
@@ -378,18 +390,18 @@ namespace OzBargainTracker
 
         private void Button_Click(object sender, RoutedEventArgs e) //Update Account Info
         {
-            Accounts.Close();
+            //Accounts.Close();
             try
             {
-                SettingsDS.WriteXml(Stuff.MyStartupLocation() + @"\Accounts.xml");
+                AccountsDS.WriteXml(Stuff.MyStartupLocation() + @"\Accounts.xml");
                 Log("Updated the account info", LogMessageType.DebugLog);
             }
             catch (Exception ex)
             {
                 Log("Couldn't update the account info", LogMessageType.Error);
             }
-            SettingsDS.Reset();
-            GetAccounts();
+            AccountsDS.Reset();
+            LoadAccounts();
         }
 
         private void StartStop_Click(object sender, RoutedEventArgs e) //Start/Stop
@@ -433,9 +445,6 @@ namespace OzBargainTracker
                 this.Height -= 200;
         }
 
-        private void MetroWindow_Loaded(object sender, RoutedEventArgs e)
-        {
-        }
 
 
 

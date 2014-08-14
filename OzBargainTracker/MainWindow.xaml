@@ -4,7 +4,7 @@
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         xmlns:behaviours="http://metro.mahapps.com/winfx/xaml/shared"
         xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
-        Title="OzBargain Tracker" Height="550" Width="350" TitleCaps="False"  MaxHeight="550" MaxWidth="350" Loaded="MetroWindow_Loaded">
+        Title="OzBargain Tracker" Height="550" Width="350" TitleCaps="False"  MaxHeight="550" MaxWidth="350">
     <Controls:MetroWindow.Resources>
         <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/FlatButton.xaml" />
     </Controls:MetroWindow.Resources>
@@ -27,8 +27,8 @@
         <Button x:Name="StartStopBtn" Content="Start" Margin="0,11,57,0" VerticalAlignment="Top" HorizontalAlignment="Right" Click="StartStop_Click" Height="31" Width="100" ToolTip="Start/Stop the deal tracker"/>
         <ProgressBar x:Name="TimeLeftPBar" Margin="10,56,0,0" Height="15" VerticalAlignment="Top" HorizontalAlignment="Left" Width="251"/>
         <Controls:NumericUpDown x:Name="RefreshRateNUD" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="266,51,10,0" ToolTip="Refresh interval in seconds (how often the app checks OzBargain for items)" Minimum="5" Maximum="6000" ValueChanged="NumericUpDown_ValueChanged"/>
-        <Label Content="Settings" HorizontalAlignment="Center" Margin="0,91,0,0" VerticalAlignment="Top"/>
-        <DataGrid x:Name="SettingsDataGrid" HorizontalAlignment="Center" Margin="0,118,0,0" VerticalAlignment="Top" Width="322" Height="140" ToolTip="Settings of the tracker"/>
+        <Label Content="Accounts" HorizontalAlignment="Center" Margin="0,91,0,0" VerticalAlignment="Top"/>
+        <DataGrid x:Name="AccountsDataGrid" HorizontalAlignment="Center" Margin="0,118,0,0" VerticalAlignment="Top" Width="322" Height="140" ToolTip="Settings of the tracker"/>
         <Button Content="Update account info" Margin="10,263,186,0" VerticalAlignment="Top" HorizontalAlignment="Center" Click="Button_Click" ToolTip="Update the settings"/>
         <RichTextBox x:Name="Log_box" HorizontalAlignment="Center" Height="150" Margin="10,360,10,0" VerticalAlignment="Top" IsReadOnly="True">
             <FlowDocument>
