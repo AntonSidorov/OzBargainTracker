@@ -412,6 +412,7 @@ namespace OzBargainTracker
                 Status_Label.Text = "Running";
                 Status_Label.Foreground = Brushes.Green;
                 StartStopBtn.Content = "Stop";
+                UpdateTimer.Start();
             }
             else
             {
@@ -419,6 +420,7 @@ namespace OzBargainTracker
                 Status_Label.Foreground = Brushes.Red;
                 StartStopBtn.Content = "Start";
                 TimeLeftPBar.Value = 0;
+                UpdateTimer.Stop();
             }
         }
 
@@ -426,9 +428,11 @@ namespace OzBargainTracker
         {
             if (RefreshRateNUD.Value >= 6)
             {
+                if(isRunning)
                 UpdateTimer.Stop();
                 UpdateTimer.Interval = TimeSpan.FromSeconds((double)RefreshRateNUD.Value);
                 Interval = (int)RefreshRateNUD.Value;
+                if(isRunning)
                 UpdateTimer.Start();
                 TimeLeftPBar.Maximum = (double)RefreshRateNUD.Value;
                 TimeLeftPBar.Value = 0;
