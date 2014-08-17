@@ -271,12 +271,12 @@ namespace OzBargainTracker
         void SaveSettings()
         {
             if (isInitialized)
-            {/*
-                foreach (XmlNode Child in Settings.ChildNodes)
+            {
+                foreach (XmlNode Child in Settings.DocumentElement.ChildNodes)
                     if (Child.Name == "Interval")
-                        Child.Value = Interval.ToString();
+                        Child.InnerText = Interval.ToString();
                 Settings.Save(Stuff.MyStartupLocation() + @"\Settings.xml");
-              */
+              
             }
         }
 
@@ -412,13 +412,13 @@ namespace OzBargainTracker
                 Status_Label.Text = "Running";
                 Status_Label.Foreground = Brushes.Green;
                 StartStopBtn.Content = "Stop";
-                TimeLeftPBar.Value = 0;
             }
             else
             {
                 Status_Label.Text = "Stopped";
                 Status_Label.Foreground = Brushes.Red;
                 StartStopBtn.Content = "Start";
+                TimeLeftPBar.Value = 0;
             }
         }
 
