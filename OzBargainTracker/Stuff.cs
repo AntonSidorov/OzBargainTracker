@@ -39,6 +39,7 @@ namespace OzBargainTracker
             foreach (string Tag in Tags)
                 Tag.Replace("_", " ");
 
+            Tags = Tgas;
         }
     }
 
