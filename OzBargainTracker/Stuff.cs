@@ -35,11 +35,11 @@ namespace OzBargainTracker
         {
             Email = email;
 
-            string[] Tgas = tags;
-            foreach (string Tag in Tags)
+            string[] TagsUnformatted = tags;
+            foreach (string Tag in TagsUnformatted)
                 Tag.Replace("_", " ");
 
-            Tags = Tgas;
+            Tags = TagsUnformatted;
         }
     }
 

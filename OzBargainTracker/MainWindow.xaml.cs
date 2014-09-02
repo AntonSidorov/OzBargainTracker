@@ -31,11 +31,10 @@ namespace OzBargainTracker
     /// </summary>
     public partial class MainWindow : MetroWindow
     {
-        BackgroundWorker WebsiteWorker = new BackgroundWorker();
         XmlReader Accounts, OzBargain;
         XmlDocument Settings;
         DispatcherTimer UpdateTimer, OneSecTimer;
-        bool isRunning = false, Advanced = false, OzBargainFetched = false, ToCheck = true, isInitialized = false, ShowTime = false;
+        bool isRunning = false, Advanced = false, isInitialized = false, ShowTime = false;
         string Email = "", Password = "", Website = "", SMTPHost = "smtp.gmail.com", Mode = "", EmailSubject = "Deals at OzBargain";
         DataSet AccountsDS = new DataSet();
         List<User> Users = new List<User>();
@@ -62,8 +61,6 @@ namespace OzBargainTracker
             OneSecTimer.Interval = TimeSpan.FromSeconds(1);
             OneSecTimer.Start();
 
-            WebsiteWorker.DoWork += WebsiteWorker_DoWork;
-            WebsiteWorker.RunWorkerCompleted += WebsiteWorker_RunWorkerCompleted;
 
             UpdateTimer = new DispatcherTimer();
             UpdateTimer.Tick += UpdateTimer_Tick;   //the timer for fetching the deals
@@ -76,24 +73,23 @@ namespace OzBargainTracker
             //Initialization of data
             LoadSettings();
 
+            Task t = Task.Run(() =>
+                {
+                    Fetch();
+                }
+                );
             Log("Started up ", LogMessageType.Info);
-            WebsiteWorker.RunWorkerAsync();
-            isInitialized = true;
         }
 
-        void WebsiteWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        async void Fetch()
         {
-            Log("OzBargain fetched", LogMessageType.DebugLog);
-            OzBargainFetched = true;
-            if (ToCheck == true)
-            {
-                Main();
-                ToCheck = false;
-            }
+            string OzBarg = await FetchOzBargain();
+            OzBargain = XmlReader.Create(new StringReader(OzBarg));
         }
 
-        void WebsiteWorker_DoWork(object sender, DoWorkEventArgs e)
+        async Task<string> FetchOzBargain()
         {
+
             this.Dispatcher.Invoke(DispatcherPriority.Normal,
                 new Action(() =>
                 {
@@ -101,7 +97,14 @@ namespace OzBargainTracker
                 }));
             try
             {
-                OzBargain = XmlReader.Create(Website);
+                HttpClient client = new HttpClient();
+                string WebsiteContent = await client.GetStringAsync(Website);
+                this.Dispatcher.Invoke(DispatcherPriority.Normal,
+                    new Action(() =>
+                    {
+                        Log("OzBargain Fetched", LogMessageType.DebugLog);
+                    }));
+                return WebsiteContent;
             }
             catch (Exception ex)
             {
@@ -110,6 +113,7 @@ namespace OzBargainTracker
                                 {
                                     Log("Unable to fetch OzBargain", LogMessageType.Error);
                                 }));
+                return "";
             }
 
         }
@@ -123,7 +127,6 @@ namespace OzBargainTracker
 
         void Checker()
         {
-            OzBargainFetched = false;
             StreamReader Reader = new StreamReader(Stuff.MyStartupLocation() + @"\LastDeal.txt");
             string LastDeal = Reader.ReadLine();
 
@@ -167,12 +170,11 @@ namespace OzBargainTracker
                                 break;              //break if found one tag(same item can have two tags, so break here)
                             }
                         }
-
-                    foreach (User user in Users)
-                    {
-                        if (user.DealsForUser.Count != 0)
-                            SendEmail(user);
-                    }
+                }
+                foreach (User user in Users)
+                {
+                    if (user.DealsForUser.Count != 0)
+                        SendEmail(user);
                 }
             }
         }
@@ -276,7 +278,7 @@ namespace OzBargainTracker
                     if (Child.Name == "Interval")
                         Child.InnerText = Interval.ToString();
                 Settings.Save(Stuff.MyStartupLocation() + @"\Settings.xml");
-              
+
             }
         }
 
@@ -291,7 +293,7 @@ namespace OzBargainTracker
                 {
                     Body += "\r\n" + Item.Title + "\r\n" + Item.Url + "\r\n";
                     foreach (string Tag in ToUser.Tags)
-                        if (Item.Title.Contains(Tag))
+                        if (Item.Title.ToUpper().Contains(Tag.ToUpper()))
                             Subject += "[" + Tag + ']';
                 }
                 MailMessage Msg = new MailMessage();
@@ -311,6 +313,7 @@ namespace OzBargainTracker
                     Credentials = new NetworkCredential(Email, Password)
                 };
 
+
                 smtp.Send(Msg);
                 Log(string.Format("Sent Email to: {0}, email topic: {1}, email text: {2}", ToUser.Email, Subject, Body), LogMessageType.Info);
 
@@ -319,11 +322,12 @@ namespace OzBargainTracker
             }
             catch (Exception ex)
             {
-                Log("Unable to send an email", LogMessageType.Error);
+                Log("Unable to send an email  " + ex.Message, LogMessageType.Error);
             }
         }
         void LoadAccounts()
         {
+            Users.Clear();
             Log("Loading accounts...", LogMessageType.DebugLog);
             XmlDocument Doc = new XmlDocument();
             Doc.Load(Stuff.MyStartupLocation() + @"\Accounts.xml");
@@ -352,11 +356,14 @@ namespace OzBargainTracker
                                 break;
                         }
                     }
-                    string[] Splitter =  {" "};
-                    string[] Tags = TagsLoaded.Split(Splitter, StringSplitOptions.None);
-                    Log("Loaded account: " + Email + "  Tags: " + TagsLoaded, LogMessageType.DebugLog);
-                    User user = new User(Email, Tags);
-                    Users.Add(user);
+                    if (Email != "")
+                    {
+                        string[] Splitter = { " " };
+                        string[] Tags = TagsLoaded.Split(Splitter, StringSplitOptions.None);
+                        Log("Loaded account: " + Email + "  Tags: " + TagsLoaded, LogMessageType.DebugLog);
+                        User user = new User(Email, Tags);
+                        Users.Add(user);
+                    }
                 }
             }
             Log("Accounts loaded", LogMessageType.DebugLog);
@@ -364,33 +371,28 @@ namespace OzBargainTracker
 
         void OneSecTimer_Tick(object sender, EventArgs e)
         {
-            if (isRunning)
-            {
-                TimeLeftPBar.Value++;
-                if (TimeLeftPBar.Value == TimeLeftPBar.Maximum - 8)
+            if (!isInitialized)
+                if (OzBargain != null)
                 {
-                    Log("Started Fetching OzBargain...", LogMessageType.DebugLog);
-                    WebsiteWorker.RunWorkerAsync();
+                    isInitialized = true;
+                    Main();
                 }
-            }
+            if (isRunning)
+                TimeLeftPBar.Value++;
         }
 
-        void UpdateTimer_Tick(object sender, EventArgs e)
+        async void UpdateTimer_Tick(object sender, EventArgs e)
         {
-            if (OzBargainFetched)
-            {
-                TimeLeftPBar.Value = 0;
-                Main();
-            }
-            else
-            {
-                ToCheck = true;
-            }
+            TimeLeftPBar.Value = 0;
+            Task<string> Fetch = FetchOzBargain();
+            await Fetch;
+            OzBargain = XmlReader.Create(new StringReader(Fetch.Result));
+            Main();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e) //Update Account Info
         {
-            //Accounts.Close();
+            Accounts.Close();
             try
             {
                 AccountsDS.WriteXml(Stuff.MyStartupLocation() + @"\Accounts.xml");
@@ -428,12 +430,12 @@ namespace OzBargainTracker
         {
             if (RefreshRateNUD.Value >= 6)
             {
-                if(isRunning)
-                UpdateTimer.Stop();
+                if (isRunning)
+                    UpdateTimer.Stop();
                 UpdateTimer.Interval = TimeSpan.FromSeconds((double)RefreshRateNUD.Value);
                 Interval = (int)RefreshRateNUD.Value;
-                if(isRunning)
-                UpdateTimer.Start();
+                if (isRunning)
+                    UpdateTimer.Start();
                 TimeLeftPBar.Maximum = (double)RefreshRateNUD.Value;
                 TimeLeftPBar.Value = 0;
                 SaveSettings();
