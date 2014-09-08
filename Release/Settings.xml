@@ -1,0 +1,11 @@
+<Settings>
+  <Email>OzBargainTracker@gmail.com</Email>
+  <Subject>Deals at OzBargain</Subject>
+  <Password>TrackOzBargain</Password>
+  <Port>587</Port>
+  <SMTPHost>smtp.gmail.com</SMTPHost>
+  <Website>http://www.ozbargain.com.au/feed</Website>
+  <Interval>18</Interval>
+  <Mode>Debug</Mode>
+  <ShowTimeInLog>true</ShowTimeInLog>
+</Settings>

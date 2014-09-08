@@ -369,13 +369,15 @@ namespace OzBargainTracker
             Log("Accounts loaded", LogMessageType.DebugLog);
         }
 
-        void OneSecTimer_Tick(object sender, EventArgs e)
+        async void OneSecTimer_Tick(object sender, EventArgs e)
         {
             if (!isInitialized)
                 if (OzBargain != null)
                 {
                     isInitialized = true;
-                    Main();
+                    StartStop_Click(null, new RoutedEventArgs());
+                    await Task.Delay(15000);
+                    UpdateTimer_Tick(null, null);
                 }
             if (isRunning)
                 TimeLeftPBar.Value++;
@@ -449,6 +451,11 @@ namespace OzBargainTracker
                 this.Height = this.MaxHeight;
             else
                 this.Height -= 200;
+        }
+
+        private void Log_box_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            Log_box.ScrollToEnd();
         }
 
 

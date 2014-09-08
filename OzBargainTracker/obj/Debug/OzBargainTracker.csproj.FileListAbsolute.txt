@@ -54,3 +54,4 @@ D:\GitHub\OzBargainTracker\OzBargainTracker\obj\Debug\OzBargainTracker_MarkupCom
 D:\GitHub\OzBargainTracker\OzBargainTracker\obj\Debug\OzBargainTracker.g.resources
 D:\GitHub\OzBargainTracker\OzBargainTracker\obj\Debug\OzBargainTracker.Properties.Resources.resources
 D:\GitHub\OzBargainTracker\OzBargainTracker\obj\Debug\OzBargainTracker.csproj.GenerateResource.Cache
+D:\GitHub\OzBargainTracker\OzBargainTracker\obj\Debug\OzBargainTracker_Content.g.cs
