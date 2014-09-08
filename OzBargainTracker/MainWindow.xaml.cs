@@ -83,8 +83,19 @@ namespace OzBargainTracker
 
         async void Fetch()
         {
-            string OzBarg = await FetchOzBargain();
-            OzBargain = XmlReader.Create(new StringReader(OzBarg));
+            try
+            {
+                string OzBarg = await FetchOzBargain();
+                OzBargain = XmlReader.Create(new StringReader(OzBarg));
+            }
+            catch (Exception ex)
+            {
+                this.Dispatcher.Invoke(DispatcherPriority.Normal,
+                new Action(() =>
+                {
+                    Log("Failed to fetch Ozbargain " + ex.Message, LogMessageType.Error);
+                }));
+            }
         }
 
         async Task<string> FetchOzBargain()
