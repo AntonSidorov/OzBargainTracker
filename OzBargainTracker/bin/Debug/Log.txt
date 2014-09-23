@@ -1,28 +1,12 @@
-[8/09/2014 7:25:26 PM] [Debug] Settings Loaded
-[8/09/2014 7:25:26 PM] [Info] Started up 
-[8/09/2014 7:25:26 PM] [Debug] Started Fetching OzBargain...
-[8/09/2014 7:25:29 PM] [Debug] OzBargain Fetched
-[8/09/2014 7:25:45 PM] [Debug] Started Fetching OzBargain...
-[8/09/2014 7:25:46 PM] [Debug] OzBargain Fetched
-[8/09/2014 7:25:46 PM] [Debug] Loading accounts...
-[8/09/2014 7:25:46 PM] [Debug] Loaded account: ToxaHD@gmail.com  Tags: Paid ios Course Udemy ipad iphone ipod
-[8/09/2014 7:25:46 PM] [Debug] Loaded account: 56e2794e@opayq.com  Tags: iTunes 5ml Factory
-[8/09/2014 7:25:46 PM] [Debug] Loaded account: 8f659d3b@opayq.com  Tags: Fast Shipping AU
-[8/09/2014 7:25:46 PM] [Debug] Loaded account: a0563594@opayq.com  Tags: Tiger AU Factory
-[8/09/2014 7:25:46 PM] [Debug] Accounts loaded
-[8/09/2014 7:25:48 PM] [Debug] Started Fetching OzBargain...
-[8/09/2014 7:25:49 PM] [Debug] OzBargain Fetched
-[8/09/2014 7:25:49 PM] [Debug] Loading accounts...
-[8/09/2014 7:25:49 PM] [Debug] Loaded account: ToxaHD@gmail.com  Tags: Paid ios Course Udemy ipad iphone ipod
-[8/09/2014 7:25:49 PM] [Debug] Loaded account: 56e2794e@opayq.com  Tags: iTunes 5ml Factory
-[8/09/2014 7:25:49 PM] [Debug] Loaded account: 8f659d3b@opayq.com  Tags: Fast Shipping AU
-[8/09/2014 7:25:49 PM] [Debug] Loaded account: a0563594@opayq.com  Tags: Tiger AU Factory
-[8/09/2014 7:25:49 PM] [Debug] Accounts loaded
-[8/09/2014 7:26:06 PM] [Debug] Started Fetching OzBargain...
-[8/09/2014 7:26:07 PM] [Debug] OzBargain Fetched
-[8/09/2014 7:26:07 PM] [Debug] Loading accounts...
-[8/09/2014 7:26:07 PM] [Debug] Loaded account: ToxaHD@gmail.com  Tags: Paid ios Course Udemy ipad iphone ipod
-[8/09/2014 7:26:07 PM] [Debug] Loaded account: 56e2794e@opayq.com  Tags: iTunes 5ml Factory
-[8/09/2014 7:26:07 PM] [Debug] Loaded account: 8f659d3b@opayq.com  Tags: Fast Shipping AU
-[8/09/2014 7:26:07 PM] [Debug] Loaded account: a0563594@opayq.com  Tags: Tiger AU Factory
-[8/09/2014 7:26:07 PM] [Debug] Accounts loaded
+[9/22/2014 6:10:56 PM] [Debug] Settings Loaded
+[9/22/2014 6:10:56 PM] [Info] Started up 
+[9/22/2014 6:10:56 PM] [Debug] Started Fetching OzBargain...
+[9/22/2014 6:10:57 PM] [Debug] Started Fetching OzBargain...
+[9/22/2014 6:10:58 PM] [Debug] OzBargain Fetched
+[9/22/2014 6:10:58 PM] [Debug] OzBargain Fetched
+[9/22/2014 6:10:58 PM] [Debug] Loading accounts...
+[9/22/2014 6:10:58 PM] [Debug] Loaded account: ToxaHD@gmail.com  Tags: Paid ios Course Udemy ipad iphone ipod
+[9/22/2014 6:10:58 PM] [Debug] Loaded account: 56e2794e@opayq.com  Tags: iTunes 5ml Factory
+[9/22/2014 6:10:58 PM] [Debug] Loaded account: 8f659d3b@opayq.com  Tags: Fast Shipping AU
+[9/22/2014 6:10:58 PM] [Debug] Loaded account: a0563594@opayq.com  Tags: Tiger AU Factory
+[9/22/2014 6:10:58 PM] [Debug] Accounts loaded

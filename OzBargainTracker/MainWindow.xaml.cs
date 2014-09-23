@@ -31,9 +31,9 @@ namespace OzBargainTracker
     /// </summary>
     public partial class MainWindow : MetroWindow
     {
-        XmlReader Accounts, OzBargain;
+        XmlReader Accounts;
         XmlDocument Settings;
-        DispatcherTimer UpdateTimer, OneSecTimer;
+        DispatcherTimer OneSecTimer;
         bool isRunning = false, Advanced = false, isInitialized = false, ShowTime = false;
         string Email = "", Password = "", Website = "", SMTPHost = "smtp.gmail.com", Mode = "", EmailSubject = "Deals at OzBargain";
         DataSet AccountsDS = new DataSet();
@@ -61,10 +61,6 @@ namespace OzBargainTracker
             OneSecTimer.Interval = TimeSpan.FromSeconds(1);
             OneSecTimer.Start();
 
-
-            UpdateTimer = new DispatcherTimer();
-            UpdateTimer.Tick += UpdateTimer_Tick;   //the timer for fetching the deals
-
             TimeLeftPBar.Value = 0;
 
             this.Height = 350;
@@ -81,12 +77,20 @@ namespace OzBargainTracker
             Log("Started up ", LogMessageType.Info);
         }
 
+        async void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            TimeLeftPBar.Value = 0;
+            Task<string> Fetch = FetchOzBargain();
+            await Fetch;
+            Main(XmlReader.Create(new StringReader(Fetch.Result)));
+        }
+
         async void Fetch()
         {
             try
             {
                 string OzBarg = await FetchOzBargain();
-                OzBargain = XmlReader.Create(new StringReader(OzBarg));
+                //OzBargain = XmlReader.Create(new StringReader(OzBarg));
             }
             catch (Exception ex)
             {
@@ -129,14 +133,14 @@ namespace OzBargainTracker
 
         }
 
-        void Main()
+        void Main(XmlReader OzBargain)
         {
             AccountsDS.Reset();
             LoadAccounts();
-            Checker();
+            Checker(OzBargain);
         }
 
-        void Checker()
+        void Checker(XmlReader OzBargain)
         {
             StreamReader Reader = new StreamReader(Stuff.MyStartupLocation() + @"\LastDeal.txt");
             string LastDeal = Reader.ReadLine();
@@ -222,9 +226,7 @@ namespace OzBargainTracker
             if (ShowTime)
                 Message = string.Format("[{0}] {1}", DateTime.Now, Message);
             Msg.Inlines.Add(Message);
-            if (MsgType == LogMessageType.DebugLog && Mode != "Debug")
-            { }
-            else
+            if (!(MsgType == LogMessageType.DebugLog && Mode != "Debug"))
                 Log_box.Document.Blocks.Add(Msg);
 
             StreamWriter Writer = new StreamWriter(Stuff.MyStartupLocation() + @"\Log.txt");
@@ -276,7 +278,6 @@ namespace OzBargainTracker
                 }
             }
             TimeLeftPBar.Maximum = Interval;
-            UpdateTimer.Interval = TimeSpan.FromSeconds(Interval);
             RefreshRateNUD.Value = Interval;
             Log("Settings Loaded", LogMessageType.DebugLog);
         }
@@ -382,25 +383,18 @@ namespace OzBargainTracker
 
         async void OneSecTimer_Tick(object sender, EventArgs e)
         {
-            if (!isInitialized)
-                if (OzBargain != null)
-                {
-                    isInitialized = true;
-                    StartStop_Click(null, new RoutedEventArgs());
-                    await Task.Delay(15000);
-                    UpdateTimer_Tick(null, null);
-                }
             if (isRunning)
+            {
                 TimeLeftPBar.Value++;
-        }
 
-        async void UpdateTimer_Tick(object sender, EventArgs e)
-        {
-            TimeLeftPBar.Value = 0;
-            Task<string> Fetch = FetchOzBargain();
-            await Fetch;
-            OzBargain = XmlReader.Create(new StringReader(Fetch.Result));
-            Main();
+                if (TimeLeftPBar.Value >= RefreshRateNUD.Value)
+                {
+                    TimeLeftPBar.Value = 0;
+                    Task<string> Fetch = FetchOzBargain();
+                    await Fetch;
+                    Main(XmlReader.Create(new StringReader(Fetch.Result)));
+                }
+            }
         }
 
         private void Button_Click(object sender, RoutedEventArgs e) //Update Account Info
@@ -427,7 +421,6 @@ namespace OzBargainTracker
                 Status_Label.Text = "Running";
                 Status_Label.Foreground = Brushes.Green;
                 StartStopBtn.Content = "Stop";
-                UpdateTimer.Start();
             }
             else
             {
@@ -435,7 +428,6 @@ namespace OzBargainTracker
                 Status_Label.Foreground = Brushes.Red;
                 StartStopBtn.Content = "Start";
                 TimeLeftPBar.Value = 0;
-                UpdateTimer.Stop();
             }
         }
 
@@ -443,12 +435,7 @@ namespace OzBargainTracker
         {
             if (RefreshRateNUD.Value >= 6)
             {
-                if (isRunning)
-                    UpdateTimer.Stop();
-                UpdateTimer.Interval = TimeSpan.FromSeconds((double)RefreshRateNUD.Value);
                 Interval = (int)RefreshRateNUD.Value;
-                if (isRunning)
-                    UpdateTimer.Start();
                 TimeLeftPBar.Maximum = (double)RefreshRateNUD.Value;
                 TimeLeftPBar.Value = 0;
                 SaveSettings();
