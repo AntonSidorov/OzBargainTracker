@@ -1,0 +1,59 @@
+﻿<Controls:MetroWindow
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"   
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:behaviours="http://metro.mahapps.com/winfx/xaml/shared"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" x:Class="OzBargainTracker.MoreWindow"
+        Title="OzBargainTracker - More" ResizeMode="CanResizeWithGrip" Height="360" TitleCaps="False" MinHeight="360" MaxWidth="500" MaxHeight="350" MinWidth="350" Width="350" Closing="MetroWindow_Closing" Activated="MetroWindow_Activated" Deactivated="MetroWindow_Deactivated">
+    <Controls:MetroWindow.Resources>
+        <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/FlatButton.xaml" />
+    </Controls:MetroWindow.Resources>
+    <i:Interaction.Behaviors>
+        <behaviours:BorderlessWindowBehavior EnableDWMDropShadow="True"/>
+        <behaviours:WindowsSettingBehaviour />
+        <behaviours:GlowWindowBehavior />
+    </i:Interaction.Behaviors>
+    <Grid >
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="40"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="10"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="2*"/>
+            </Grid.ColumnDefinitions>
+            <StackPanel Grid.Column="1" Margin="0" Grid.Row="1">
+                <Label Content="Version" HorizontalAlignment="Left" VerticalAlignment="Top" ToolTip="Version of the Tracker"/>
+                <Label Content="Website" HorizontalAlignment="Left" VerticalAlignment="Top" ToolTip="The website that is fetched by the Tracker and used to get the deals" Margin="0,5,0,0"/>
+                <Label Content="Email" HorizontalAlignment="Left" VerticalAlignment="Top" ToolTip="Email that sends the notifications of deals to you" Margin="0,5,0,0"/>
+                <Label Content="Password" HorizontalAlignment="Left" Margin="0,5,0,0" VerticalAlignment="Top" ToolTip="The website that is fetched by the Tracker and used to get the deals"/>
+                <Label Content="Email SMTP Host" HorizontalAlignment="Left" Margin="0,5,0,0" VerticalAlignment="Top" ToolTip="SMTP Host of the email"/>
+                <Label Content="Subject" HorizontalAlignment="Left" Margin="0,5,0,0" VerticalAlignment="Top" ToolTip="Subject of the email notification sent by the tracker"/>
+                <Label Content="Port" HorizontalAlignment="Left" Margin="0,5,0,0" VerticalAlignment="Top" ToolTip="Port "/>
+            </StackPanel>
+            <StackPanel Grid.Column="2" Orientation="Vertical" Grid.Row="2">
+                <Label x:Name="VersionLbl" Content="[Version]" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                <TextBox x:Name="WebsiteTbx" Margin="0,0,10,0" TextWrapping="Wrap" Text="[Website]" VerticalAlignment="Top" TextChanged="WebsiteTbx_TextChanged"/>
+                <TextBox x:Name="EmailTbx" TextWrapping="Wrap" Text="[Email]" VerticalAlignment="Top" Margin="0,5,10,0" TextChanged="EmailTbx_TextChanged"/>
+                <TextBox x:Name="PasswordTbx" Margin="0,5,10,0" TextWrapping="Wrap" Text="[Password]" VerticalAlignment="Top" TextChanged="PasswordTbx_TextChanged"/>
+                <TextBox x:Name="SMTPHostTbx" Margin="0,5,10,0" TextWrapping="Wrap" Text="[SMPTHost]" VerticalAlignment="Top" TextChanged="SMTPHostTbx_TextChanged"/>
+                <TextBox x:Name="EmailSubjectTbx" Margin="0,5,10,0" TextWrapping="Wrap" Text="[EmailSubject]" VerticalAlignment="Top" TextChanged="EmailSubjectTbx_TextChanged"/>
+                <Controls:NumericUpDown x:Name="PortNUD" Margin="0,5,10,0" VerticalAlignment="Top" Minimum="0" Value="587" HorizontalAlignment="Left" ValueChanged="PortNUD_ValueChanged"/>
+
+            </StackPanel>
+            <CheckBox x:Name="LogTimeChk" Content="Show Time in Log" HorizontalAlignment="Center" VerticalAlignment="Top" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Margin="0,211,-0.8,0" Checked="LogTimeChk_Checked" Unchecked="LogTimeChk_Checked"/>
+            <Label Content="Even more settings" Grid.Column="1" Margin="0,5,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2" HorizontalAlignment="Center"/>
+        </Grid>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Button x:Name="DonateBtn" Content="Donate" HorizontalAlignment="Center" Height="31" VerticalAlignment="Bottom" Width="78" Background="#FFD5D5D5" Padding="10,5" Margin="0,0,0,10" Click="DonateBtn_Click"/>
+            <Button x:Name="GithubBtn" Content="Github" HorizontalAlignment="Center" Height="31" VerticalAlignment="Bottom" Width="78" Background="#FFD5D5D5" Padding="10,5" Margin="0,0,0,10" Click="GithubBtn_Click" Grid.Column="1"/>
+        </Grid>
+    </Grid>
+</Controls:MetroWindow>

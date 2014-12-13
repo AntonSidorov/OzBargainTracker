@@ -14,4 +14,5 @@ namespace OzBargainTracker
     public partial class App : Application
     {
     }
+
 }

@@ -1,27 +1,34 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.30501.0
+VisualStudioVersion = 12.0.21005.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OzBargainTracker", "OzBargainTracker\OzBargainTracker.csproj", "{7AE8D02D-6745-46E7-87E6-7551334F6C4C}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{623CD6B0-87A8-477A-AC48-6B80BD9C9AC4}"
-	ProjectSection(SolutionItems) = preProject
-		.nuget\NuGet.Config = .nuget\NuGet.Config
-		.nuget\NuGet.exe = .nuget\NuGet.exe
-		.nuget\NuGet.targets = .nuget\NuGet.targets
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OzBargainTracker", "OzBargainTracker\OzBargainTracker.csproj", "{6B3A04DC-15F9-432F-9732-5A36B6E517F3}"
+	ProjectSection(ProjectDependencies) = postProject
+		{F9CED81D-807F-439C-863E-B4E9EFCD949D} = {F9CED81D-807F-439C-863E-B4E9EFCD949D}
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrackerBuilder", "TrackerBuilder\TrackerBuilder.csproj", "{F9CED81D-807F-439C-863E-B4E9EFCD949D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
+		PortableRelease|Any CPU = PortableRelease|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{7AE8D02D-6745-46E7-87E6-7551334F6C4C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7AE8D02D-6745-46E7-87E6-7551334F6C4C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7AE8D02D-6745-46E7-87E6-7551334F6C4C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7AE8D02D-6745-46E7-87E6-7551334F6C4C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6B3A04DC-15F9-432F-9732-5A36B6E517F3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6B3A04DC-15F9-432F-9732-5A36B6E517F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6B3A04DC-15F9-432F-9732-5A36B6E517F3}.PortableRelease|Any CPU.ActiveCfg = PortableRelease|Any CPU
+		{6B3A04DC-15F9-432F-9732-5A36B6E517F3}.PortableRelease|Any CPU.Build.0 = PortableRelease|Any CPU
+		{6B3A04DC-15F9-432F-9732-5A36B6E517F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6B3A04DC-15F9-432F-9732-5A36B6E517F3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F9CED81D-807F-439C-863E-B4E9EFCD949D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F9CED81D-807F-439C-863E-B4E9EFCD949D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F9CED81D-807F-439C-863E-B4E9EFCD949D}.PortableRelease|Any CPU.ActiveCfg = Release|Any CPU
+		{F9CED81D-807F-439C-863E-B4E9EFCD949D}.PortableRelease|Any CPU.Build.0 = Release|Any CPU
+		{F9CED81D-807F-439C-863E-B4E9EFCD949D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F9CED81D-807F-439C-863E-B4E9EFCD949D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

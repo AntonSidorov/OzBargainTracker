@@ -1,0 +1,7 @@
+<?xml version="1.0" standalone="yes"?>
+<Accounts>
+  <Account>
+    <Email>Someone@example.com</Email>
+    <Tags>Please insert your tags here with a space in between each</Tags>
+  </Account>
+</Accounts>

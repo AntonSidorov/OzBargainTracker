@@ -1,0 +1,9 @@
+D:\Documents\OneDrive\Documents\IT\Projects\Private\OzBargainTracker\TrackerBuilder\obj\Release\TrackerBuilder.exe
+D:\Documents\OneDrive\Documents\IT\Projects\Private\OzBargainTracker\TrackerBuilder\obj\Release\TrackerBuilder.pdb
+D:\Documents\OneDrive\Documents\IT\Projects\TrackerBuilder.exe.config
+D:\Documents\OneDrive\Documents\IT\Projects\TrackerBuilder.exe
+D:\Documents\OneDrive\Documents\IT\Projects\TrackerBuilder.pdb
+D:\Documents\OneDrive\Documents\IT\Projects\Private\OzBargainTracker\TrackerBuilder.exe.config
+D:\Documents\OneDrive\Documents\IT\Projects\Private\OzBargainTracker\TrackerBuilder.exe
+D:\Documents\OneDrive\Documents\IT\Projects\Private\OzBargainTracker\TrackerBuilder.pdb
+D:\Documents\OneDrive\Documents\IT\Projects\Private\OzBargainTracker\TrackerBuilder\obj\Release\TrackerBuilder.csprojResolveAssemblyReference.cache

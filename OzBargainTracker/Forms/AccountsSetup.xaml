@@ -1,0 +1,24 @@
+﻿<Controls:MetroWindow
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+    xmlns:behaviours="http://metro.mahapps.com/winfx/xaml/shared"
+    xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
+	x:Class="OzBargainTracker.AccountsSetup"
+	x:Name="Window"
+	Title="AccountsSetup"
+	Width="640" Height="480" Closing="Window_Closing" Activated="MetroWindow_Activated" Deactivated="MetroWindow_Deactivated">
+    <i:Interaction.Behaviors>
+        <behaviours:BorderlessWindowBehavior EnableDWMDropShadow="True"/>
+        <behaviours:WindowsSettingBehaviour />
+        <behaviours:GlowWindowBehavior />
+    </i:Interaction.Behaviors>
+    <Controls:MetroWindow.Resources>
+        <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/FlatButton.xaml" />
+    </Controls:MetroWindow.Resources>
+    <Grid x:Name="LayoutRoot" Height="450" Width="632">
+        <DataGrid x:Name="AccountsDataGrid" HorizontalAlignment="Left" Margin="10,40.96,0,0" VerticalAlignment="Top" Height="347" Width="612"/>
+        <Label Content="Accounts" HorizontalAlignment="Center" Margin="0,10,0,0" VerticalAlignment="Top" HorizontalContentAlignment="Stretch"/>
+        <Button x:Name="UpdateBtn" Content="Update" HorizontalAlignment="Center" Height="47.04" Margin="-1,392.96,0,0" VerticalAlignment="Top" Width="100" Click="UpdateBtn_Click"/>
+    </Grid>
+</Controls:MetroWindow>

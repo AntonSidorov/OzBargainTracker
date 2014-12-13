@@ -1,7 +1,8 @@
-﻿<Application x:Class="OzBargainTracker.App"
+﻿<Application x:Class="OzBargainTrackerRelease.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             StartupUri="MainWindow.xaml">
+             StartupUri="Forms\TrackerMain.xaml"
+             ShutdownMode="OnMainWindowClose">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>

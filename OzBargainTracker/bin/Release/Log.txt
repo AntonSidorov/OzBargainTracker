@@ -1,0 +1,6 @@
+Log:      
+[13/12/2014 5:40:18 PM] [Debug] Setting up the Custom Classes
+[13/12/2014 5:40:18 PM] [Debug] Setup part 1 finished
+[13/12/2014 5:40:18 PM] [Debug] Loading Accounts and Settings
+[13/12/2014 5:40:18 PM] [Debug] All 8 Elements from the xml have been loaded
+[Info] Accounts and Settings Loaded successfully
