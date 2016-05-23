@@ -1,96 +1,82 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml;
+﻿#region
+
+using System;
 using System.IO;
+using System.Xml;
+
+#endregion
 
 namespace OzBargainTracker
 {
-    /// <summary>
-    /// Class for the settings of the tracker
-    /// </summary>
     public class AppSettings
     {
-        public bool LogShowTime, Debug;
-        public string Email, Password, Website, SMTPHost, EmailSubject;
+        private readonly TrackerMain _mainForm;
+        private XmlDocument _settingsDocument = new XmlDocument();
+        public string Email, Password, Website, SmtpHost, EmailSubject;
         public int Interval, Port;
-        XmlDocument SettingsDocument = new XmlDocument();
-        TrackerMain MainForm;
-        
-        /// <summary>
-        /// Default Constructor for TrackerSettings Class
-        /// </summary>
-        public AppSettings(TrackerMain MainForm)
+        public bool LogShowTime, Debug;
+
+        public AppSettings(TrackerMain mainForm)
         {
-            this.MainForm = MainForm;
-            Debug = true;
-            Interval = 60;         
+            _mainForm = mainForm;
+            Debug = false;
+            Interval = 60;
             LogShowTime = false;
             Website = "http://www.ozbargain.com.au/feed";
             Email = "OzBargainTracker@gmail.com";
             EmailSubject = "Deals at OzBargain";
             Password = "TrackOzBargain";
             Port = 587;
-            SMTPHost = "smtp.gmail.com";
+            SmtpHost = "smtp.gmail.com";
         }
-        /// <summary>
-        /// Constructor which loads the settings from a special file
-        /// </summary>
-        /// <param name="SettingsLocation">The location of the settings</param>
-        public AppSettings(TrackerMain MainForm, string SettingsLocation)
+
+        public AppSettings(TrackerMain mainForm, string settingsLocation)
         {
-            this.MainForm = MainForm;
-            Load(SettingsLocation);
+            _mainForm = mainForm;
+            Load(settingsLocation);
         }
-        /// <summary>
-        /// Loads the Settings from the path given
-        /// </summary>
-        /// <param name="SettingsLocation">Path used to load the settings</param>
-        public void Load (string SettingsLocation)
+
+        public void Load(string settingsLocation)
         {
-            int LoadedElements = 0, TotalElements = 8;
-            bool ExceptionCaught = false;
+            int loadedElements = 0, totalElements = 8;
+            var exceptionCaught = false;
             try
-            {//Possible problems: File not found/in use/file not formatted properly(not xml)
-                SettingsDocument.Load(SettingsLocation);
-                // Get the settings from the XML here
-                foreach (XmlNode Node in SettingsDocument.DocumentElement.ChildNodes)
-                {
-                    switch (Node.Name.ToLower())
+            {
+                _settingsDocument.Load(settingsLocation);
+                foreach (XmlNode node in _settingsDocument.DocumentElement.ChildNodes)
+                    switch (node.Name.ToLower())
                     {
                         case "email":
-                            Email = Node.InnerText;
-                            LoadedElements++;                            
+                            Email = node.InnerText;
+                            loadedElements++;
                             break;
                         case "website":
-                            Website = Node.InnerText;
-                            LoadedElements++;
+                            Website = node.InnerText;
+                            loadedElements++;
                             break;
                         case "password":
-                            Password = Node.InnerText;
-                            LoadedElements++;
+                            Password = node.InnerText;
+                            loadedElements++;
                             break;
                         case "smtphost":
-                            SMTPHost = Node.InnerText;
-                            LoadedElements++;
+                            SmtpHost = node.InnerText;
+                            loadedElements++;
                             break;
                         case "emailsubject":
-                            EmailSubject = Node.InnerText;
-                            LoadedElements++;
+                            EmailSubject = node.InnerText;
+                            loadedElements++;
                             break;
                         case "port":
-                            Port = int.Parse(Node.InnerText);
-                            LoadedElements++;
+                            Port = int.Parse(node.InnerText);
+                            loadedElements++;
                             break;
                         case "logshowtime":
-                            LogShowTime = bool.Parse(Node.InnerText);
-                            LoadedElements++;
+                            LogShowTime = bool.Parse(node.InnerText);
+                            loadedElements++;
                             break;
                         case "interval":
-                            Interval = int.Parse(Node.InnerText);
-                            LoadedElements++;
+                            Interval = int.Parse(node.InnerText);
+                            loadedElements++;
                             break;
                         case "debug":
                             Debug = true;
@@ -98,23 +84,17 @@ namespace OzBargainTracker
                         default:
                             break;
                     }
-                }
             }
-            catch(FileNotFoundException ex)
+            catch (FileNotFoundException ex)
             {
-                MainForm.Log("Settings.xml not found, loading default settings.", LogMessageType.HandledError);
-                MainForm.Log("Default Settings have been saved to Settings.xml");
-                MainForm.LogException(ex);
-                ExceptionCaught = true;
+                exceptionCaught = true;
             }
             catch (Exception ex)
-            {//Look out for these
-                MainForm.Log("Unknown Exception has occured, loading default settings.", LogMessageType.HandledError);
-                MainForm.Log("Default Settings have been saved to Settings.xml");
-                MainForm.LogException(ex);
-                ExceptionCaught = true;
+            {
+//Look out for these
+                exceptionCaught = true;
             }
-            if (ExceptionCaught)
+            if (exceptionCaught)
             {
                 Debug = false;
                 Interval = 60;
@@ -124,89 +104,63 @@ namespace OzBargainTracker
                 EmailSubject = "Deals at OzBargain";
                 Password = "TrackOzBargain";
                 Port = 587;
-                SMTPHost = "smtp.gmail.com";
+                SmtpHost = "smtp.gmail.com";
                 Save();
-                MainForm.Log("Unable to load settings, default settings loaded and saved to Settings.xml");
-            }
-            else
-            {
-                //Check if all of the settings have been loaded
-                if(LoadedElements == TotalElements)
-                    MainForm.Log("All 8 Elements from the xml have been loaded", LogMessageType.DebugLog);
-                if (LoadedElements < TotalElements)
-                    MainForm.Log("Some of the settings in the XML were not set, attempting to continue...", LogMessageType.Warning);
-                if (LoadedElements > TotalElements)
-                    MainForm.Log("Some of the settings in the XML have been set twice, attempting to continue...", LogMessageType.Warning);
             }
         }
-        /// <summary>
-        /// Saves all the settings to Settings.Xml
-        /// </summary>
-        public void Save ()
+
+        public void Save()
         {
-            //Setup Root
-            SettingsDocument = new XmlDocument();
-            XmlNode RootNode = SettingsDocument.CreateElement("Settings");
-            SettingsDocument.AppendChild(RootNode);
+            _settingsDocument = new XmlDocument();
+            XmlNode rootNode = _settingsDocument.CreateElement("Settings");
+            _settingsDocument.AppendChild(rootNode);
 
-            XmlNode Node2Add;
-
-            //Debug
+            XmlNode node2Add;
             if (Debug)
             {
-                Node2Add = SettingsDocument.CreateElement("Debug");
-                Node2Add.InnerText = "true";
-                RootNode.AppendChild(Node2Add);
+                node2Add = _settingsDocument.CreateElement("Debug");
+                node2Add.InnerText = "true";
+                rootNode.AppendChild(node2Add);
             }
+            node2Add = _settingsDocument.CreateElement("Interval");
+            node2Add.InnerText = Interval.ToString();
+            rootNode.AppendChild(node2Add);
 
-            //Interval 
-            Node2Add = SettingsDocument.CreateElement("Interval");
-            Node2Add.InnerText = Interval.ToString();
-            RootNode.AppendChild(Node2Add);
+            node2Add = _settingsDocument.CreateElement("LogShowTime");
+            node2Add.InnerText = LogShowTime.ToString();
+            rootNode.AppendChild(node2Add);
 
-            //LogShowTime 
-            Node2Add = SettingsDocument.CreateElement("LogShowTime");
-            Node2Add.InnerText = LogShowTime.ToString();
-            RootNode.AppendChild(Node2Add);
+            node2Add = _settingsDocument.CreateElement("SMTPHost");
+            node2Add.InnerText = SmtpHost;
+            rootNode.AppendChild(node2Add);
 
-            //SMTPHost 
-            Node2Add = SettingsDocument.CreateElement("SMTPHost");
-            Node2Add.InnerText = SMTPHost;
-            RootNode.AppendChild(Node2Add);
+            node2Add = _settingsDocument.CreateElement("Website");
+            node2Add.InnerText = Website;
+            rootNode.AppendChild(node2Add);
 
-            //Website 
-            Node2Add = SettingsDocument.CreateElement("Website");
-            Node2Add.InnerText = Website;
-            RootNode.AppendChild(Node2Add);
+            node2Add = _settingsDocument.CreateElement("Email");
+            node2Add.InnerText = Email;
+            rootNode.AppendChild(node2Add);
 
-            //Email 
-            Node2Add = SettingsDocument.CreateElement("Email");
-            Node2Add.InnerText = Email;
-            RootNode.AppendChild(Node2Add);
+            node2Add = _settingsDocument.CreateElement("EmailSubject");
+            node2Add.InnerText = EmailSubject;
+            rootNode.AppendChild(node2Add);
 
-            //EmailSubject
-            Node2Add = SettingsDocument.CreateElement("EmailSubject");
-            Node2Add.InnerText = EmailSubject;
-            RootNode.AppendChild(Node2Add);
+            node2Add = _settingsDocument.CreateElement("Password");
+            node2Add.InnerText = Password;
+            rootNode.AppendChild(node2Add);
 
-            //Password 
-            Node2Add = SettingsDocument.CreateElement("Password");
-            Node2Add.InnerText = Password;
-            RootNode.AppendChild(Node2Add);
-
-            //Port 
-            Node2Add = SettingsDocument.CreateElement("Port");
-            Node2Add.InnerText = Port.ToString();
-            RootNode.AppendChild(Node2Add);
+            node2Add = _settingsDocument.CreateElement("Port");
+            node2Add.InnerText = Port.ToString();
+            rootNode.AppendChild(node2Add);
 
             try
-            {//Possible problems: File in use
-                SettingsDocument.Save(Utils.StartupLocation + @"\Settings.xml");
-            }
-            catch(Exception ex)
             {
-                MainForm.Log("Unable to save the settings, retrying next time settings are changed.", LogMessageType.UnHandledError);
-                MainForm.LogException(ex);
+                _settingsDocument.Save(Utils.StartupLocation + @"\Settings.xml");
+            }
+            catch (Exception ex)
+            {
+                _mainForm.LogException(ex);
             }
         }
     }

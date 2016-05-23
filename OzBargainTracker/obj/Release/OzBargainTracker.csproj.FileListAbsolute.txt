@@ -74,3 +74,71 @@ D:\Documents\OneDrive\Documents\IT\Projects\Private\OzBargainTracker\OzBargainTr
 D:\Documents\OneDrive\Documents\IT\Projects\Private\OzBargainTracker\OzBargainTracker\obj\Release\OzBargainTracker.application
 D:\Documents\OneDrive\Documents\IT\Projects\Private\OzBargainTracker\OzBargainTracker\obj\Release\OzBargainTracker.exe
 D:\Documents\OneDrive\Documents\IT\Projects\Private\OzBargainTracker\OzBargainTracker\obj\Release\OzBargainTracker.pdb
+D:\OneDrive\Documents\Programming\Projects\Git\OzBargainTracker\OzBargainTracker\bin\Release\Icon.png
+D:\OneDrive\Documents\Programming\Projects\Git\OzBargainTracker\OzBargainTracker\bin\Release\Icon2.png
+D:\OneDrive\Documents\Programming\Projects\Git\OzBargainTracker\OzBargainTracker\bin\Release\OzBargainTracker.exe.config
+D:\OneDrive\Documents\Programming\Projects\Git\OzBargainTracker\OzBargainTracker\bin\Release\OzBargainTracker.exe
+D:\OneDrive\Documents\Programming\Projects\Git\OzBargainTracker\OzBargainTracker\bin\Release\OzBargainTracker.pdb
+D:\OneDrive\Documents\Programming\Projects\Git\OzBargainTracker\OzBargainTracker\bin\Release\System.Windows.Interactivity.dll
+D:\OneDrive\Documents\Programming\Projects\Git\OzBargainTracker\OzBargainTracker\bin\Release\MahApps.Metro.pdb
+D:\OneDrive\Documents\Programming\Projects\Git\OzBargainTracker\OzBargainTracker\bin\Release\MahApps.Metro.xml
+D:\OneDrive\Documents\Programming\Projects\Git\OzBargainTracker\OzBargainTracker\bin\Release\de\System.Windows.Interactivity.resources.dll
+D:\OneDrive\Documents\Programming\Projects\Git\OzBargainTracker\OzBargainTracker\bin\Release\en\System.Windows.Interactivity.resources.dll
+D:\OneDrive\Documents\Programming\Projects\Git\OzBargainTracker\OzBargainTracker\bin\Release\es\System.Windows.Interactivity.resources.dll
+D:\OneDrive\Documents\Programming\Projects\Git\OzBargainTracker\OzBargainTracker\bin\Release\fr\System.Windows.Interactivity.resources.dll
+D:\OneDrive\Documents\Programming\Projects\Git\OzBargainTracker\OzBargainTracker\bin\Release\it\System.Windows.Interactivity.resources.dll
+D:\OneDrive\Documents\Programming\Projects\Git\OzBargainTracker\OzBargainTracker\bin\Release\ja\System.Windows.Interactivity.resources.dll
+D:\OneDrive\Documents\Programming\Projects\Git\OzBargainTracker\OzBargainTracker\bin\Release\ko\System.Windows.Interactivity.resources.dll
+D:\OneDrive\Documents\Programming\Projects\Git\OzBargainTracker\OzBargainTracker\bin\Release\ru\System.Windows.Interactivity.resources.dll
+D:\OneDrive\Documents\Programming\Projects\Git\OzBargainTracker\OzBargainTracker\bin\Release\zh-Hans\System.Windows.Interactivity.resources.dll
+D:\OneDrive\Documents\Programming\Projects\Git\OzBargainTracker\OzBargainTracker\bin\Release\zh-Hant\System.Windows.Interactivity.resources.dll
+D:\OneDrive\Documents\Programming\Projects\Git\OzBargainTracker\OzBargainTracker\obj\Release\OzBargainTracker.csprojResolveAssemblyReference.cache
+D:\OneDrive\Documents\Programming\Projects\Git\OzBargainTracker\OzBargainTracker\obj\Release\Forms\AccountsSetup.baml
+D:\OneDrive\Documents\Programming\Projects\Git\OzBargainTracker\OzBargainTracker\obj\Release\Forms\More.baml
+D:\OneDrive\Documents\Programming\Projects\Git\OzBargainTracker\OzBargainTracker\obj\Release\Forms\TrackerMain.baml
+D:\OneDrive\Documents\Programming\Projects\Git\OzBargainTracker\OzBargainTracker\obj\Release\App.baml
+D:\OneDrive\Documents\Programming\Projects\Git\OzBargainTracker\OzBargainTracker\obj\Release\Forms\AccountsSetup.g.cs
+D:\OneDrive\Documents\Programming\Projects\Git\OzBargainTracker\OzBargainTracker\obj\Release\Forms\More.g.cs
+D:\OneDrive\Documents\Programming\Projects\Git\OzBargainTracker\OzBargainTracker\obj\Release\Forms\TrackerMain.g.cs
+D:\OneDrive\Documents\Programming\Projects\Git\OzBargainTracker\OzBargainTracker\obj\Release\App.g.cs
+D:\OneDrive\Documents\Programming\Projects\Git\OzBargainTracker\OzBargainTracker\obj\Release\OzBargainTracker_MarkupCompile.cache
+D:\OneDrive\Documents\Programming\Projects\Git\OzBargainTracker\OzBargainTracker\obj\Release\OzBargainTracker.g.resources
+D:\OneDrive\Documents\Programming\Projects\Git\OzBargainTracker\OzBargainTracker\obj\Release\OzBargainTracker.Properties.Resources.resources
+D:\OneDrive\Documents\Programming\Projects\Git\OzBargainTracker\OzBargainTracker\obj\Release\OzBargainTracker.csproj.GenerateResource.Cache
+D:\OneDrive\Documents\Programming\Projects\Git\OzBargainTracker\OzBargainTracker\obj\Release\OzBargainTracker.exe
+D:\OneDrive\Documents\Programming\Projects\Git\OzBargainTracker\OzBargainTracker\obj\Release\OzBargainTracker.pdb
+D:\OneDrive\Documents\Programming\Projects\Git\OzBargainTracker 2\OzBargainTracker\bin\Release\OzBargainTracker.exe.config
+D:\OneDrive\Documents\Programming\Projects\Git\OzBargainTracker 2\OzBargainTracker\obj\Release\OzBargainTracker.exe
+D:\OneDrive\Documents\Programming\Projects\Git\OzBargainTracker 2\OzBargainTracker\obj\Release\OzBargainTracker.pdb
+D:\OneDrive\Documents\Programming\Projects\Git\OzBargainTracker 2\OzBargainTracker\bin\Release\OzBargainTracker.exe
+D:\OneDrive\Documents\Programming\Projects\Git\OzBargainTracker 2\OzBargainTracker\bin\Release\OzBargainTracker.pdb
+D:\OneDrive\Documents\Programming\Projects\Git\OzBargainTracker 2\OzBargainTracker\bin\Release\Log.dll
+D:\OneDrive\Documents\Programming\Projects\Git\OzBargainTracker 2\OzBargainTracker\bin\Release\MahApps.Metro.dll
+D:\OneDrive\Documents\Programming\Projects\Git\OzBargainTracker 2\OzBargainTracker\bin\Release\System.Windows.Interactivity.dll
+D:\OneDrive\Documents\Programming\Projects\Git\OzBargainTracker 2\OzBargainTracker\bin\Release\Log.pdb
+D:\OneDrive\Documents\Programming\Projects\Git\OzBargainTracker 2\OzBargainTracker\bin\Release\MahApps.Metro.pdb
+D:\OneDrive\Documents\Programming\Projects\Git\OzBargainTracker 2\OzBargainTracker\bin\Release\MahApps.Metro.xml
+D:\OneDrive\Documents\Programming\Projects\Git\OzBargainTracker 2\OzBargainTracker\bin\Release\de\System.Windows.Interactivity.resources.dll
+D:\OneDrive\Documents\Programming\Projects\Git\OzBargainTracker 2\OzBargainTracker\bin\Release\en\System.Windows.Interactivity.resources.dll
+D:\OneDrive\Documents\Programming\Projects\Git\OzBargainTracker 2\OzBargainTracker\bin\Release\es\System.Windows.Interactivity.resources.dll
+D:\OneDrive\Documents\Programming\Projects\Git\OzBargainTracker 2\OzBargainTracker\bin\Release\fr\System.Windows.Interactivity.resources.dll
+D:\OneDrive\Documents\Programming\Projects\Git\OzBargainTracker 2\OzBargainTracker\bin\Release\it\System.Windows.Interactivity.resources.dll
+D:\OneDrive\Documents\Programming\Projects\Git\OzBargainTracker 2\OzBargainTracker\bin\Release\ja\System.Windows.Interactivity.resources.dll
+D:\OneDrive\Documents\Programming\Projects\Git\OzBargainTracker 2\OzBargainTracker\bin\Release\ko\System.Windows.Interactivity.resources.dll
+D:\OneDrive\Documents\Programming\Projects\Git\OzBargainTracker 2\OzBargainTracker\bin\Release\ru\System.Windows.Interactivity.resources.dll
+D:\OneDrive\Documents\Programming\Projects\Git\OzBargainTracker 2\OzBargainTracker\bin\Release\zh-Hans\System.Windows.Interactivity.resources.dll
+D:\OneDrive\Documents\Programming\Projects\Git\OzBargainTracker 2\OzBargainTracker\bin\Release\zh-Hant\System.Windows.Interactivity.resources.dll
+D:\OneDrive\Documents\Programming\Projects\Git\OzBargainTracker 2\OzBargainTracker\obj\Release\OzBargainTracker.csprojResolveAssemblyReference.cache
+D:\OneDrive\Documents\Programming\Projects\Git\OzBargainTracker 2\OzBargainTracker\obj\Release\Forms\AccountsSetup.baml
+D:\OneDrive\Documents\Programming\Projects\Git\OzBargainTracker 2\OzBargainTracker\obj\Release\Forms\More.baml
+D:\OneDrive\Documents\Programming\Projects\Git\OzBargainTracker 2\OzBargainTracker\obj\Release\Forms\TrackerMain.baml
+D:\OneDrive\Documents\Programming\Projects\Git\OzBargainTracker 2\OzBargainTracker\obj\Release\Forms\AccountsSetup.g.cs
+D:\OneDrive\Documents\Programming\Projects\Git\OzBargainTracker 2\OzBargainTracker\obj\Release\Forms\More.g.cs
+D:\OneDrive\Documents\Programming\Projects\Git\OzBargainTracker 2\OzBargainTracker\obj\Release\Forms\TrackerMain.g.cs
+D:\OneDrive\Documents\Programming\Projects\Git\OzBargainTracker 2\OzBargainTracker\obj\Release\App.g.cs
+D:\OneDrive\Documents\Programming\Projects\Git\OzBargainTracker 2\OzBargainTracker\obj\Release\OzBargainTracker_MarkupCompile.cache
+D:\OneDrive\Documents\Programming\Projects\Git\OzBargainTracker 2\OzBargainTracker\obj\Release\OzBargainTracker_MarkupCompile.lref
+D:\OneDrive\Documents\Programming\Projects\Git\OzBargainTracker 2\OzBargainTracker\obj\Release\App.baml
+D:\OneDrive\Documents\Programming\Projects\Git\OzBargainTracker 2\OzBargainTracker\obj\Release\OzBargainTracker.g.resources
+D:\OneDrive\Documents\Programming\Projects\Git\OzBargainTracker 2\OzBargainTracker\obj\Release\OzBargainTracker.Properties.Resources.resources
+D:\OneDrive\Documents\Programming\Projects\Git\OzBargainTracker 2\OzBargainTracker\obj\Release\OzBargainTracker.csproj.GenerateResource.Cache

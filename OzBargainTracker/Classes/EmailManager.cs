@@ -1,111 +1,81 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Collections.Concurrent;
-using System.Threading.Tasks;
-using System.Net.Mail;
-using System.Net;
-using System.Windows.Threading;
-using System.Timers;
+﻿#region
 
-namespace OzBargainTracker
+using System;
+using System.Collections.Concurrent;
+using System.Linq;
+using System.Net;
+using System.Net.Mail;
+using System.Threading.Tasks;
+using System.Timers;
+using LogWriter;
+
+#endregion
+
+namespace OzBargainTracker.Classes
 {
-    /// <summary>
-    /// Class representing the separate threaded worker that sends emails when they are added to the Queue
-    /// </summary>
     public class EmailManager
     {
-        /// <summary>
-        /// Queue used for the emails
-        /// </summary>
+        private readonly TrackerMain _mainForm;
+        private readonly Timer _timer = new Timer();
         public ConcurrentQueue<User> Requests;
-        /// <summary>
-        /// MainForm
-        /// </summary>
-        TrackerMain MainForm;
-        /// <summary>
-        /// Timer that checks if there's anything in the Queue and if there is activates the process request method 
-        /// </summary>
-        Timer _Timer = new Timer();
-        /// <summary>
-        /// Default constructor for the class
-        /// </summary>
-        /// <param name="MainForm">Reference to the MainForm(for Logs and settings)</param>
-        public EmailManager(TrackerMain MainForm)
+
+        public EmailManager(TrackerMain mainForm)
         {
-            this.MainForm = MainForm;
+            _mainForm = mainForm;
             Requests = new ConcurrentQueue<User>();
-            _Timer.Interval = 15000;
-            _Timer.Elapsed += Timer_Tick;
-            _Timer.Start();
+            _timer.Interval = 15000;
+            _timer.Elapsed += Timer_Tick;
+            _timer.Start();
         }
 
-        void Timer_Tick(object sender, EventArgs e)
+        private void Timer_Tick(object sender, EventArgs e)
         {
             if (Requests.Count > 0)
-            {
                 new Task(() =>
                 {
-                    User Req;
-                    bool Success = Requests.TryDequeue(out Req);
-                    if (Success)
-                        ProcessRequest(Req);
+                    User req;
+                    var success = Requests.TryDequeue(out req);
+                    if (success)
+                        ProcessRequest(req);
                 }).Start();
-            }
         }
-        /// <summary>
-        /// Method that processes the send email request
-        /// </summary>
-        /// <param name="_User">The user the email will be sent to</param>
-        void ProcessRequest(User _User)
+
+        private void ProcessRequest(User user)
         {
-            //Build the message
-            MainForm.Log("Trying to send an email to " + _User.Email, LogMessageType.DebugLog);
-            MailMessage Message = new MailMessage();
-            MailAddress Address = new MailAddress(MainForm.Settings.Email);
-            Message.From = Address;
-            Message.To.Add(_User.Email);
+            Logger.CurrentLogger.Log($"Emailing {user.Email} with {user.DealsForUser.Count} Deals.", LogType.DebugLog);
+            var message = new MailMessage();
+            var address = new MailAddress(_mainForm.Settings.Email);
+            message.From = address;
+            message.To.Add(user.Email);
 
-            string Body = "", Subject = MainForm.Settings.EmailSubject;
-            //Add tags to the email
-            foreach (string Tag in _User.TriggerTags)
-                Subject += string.Format("[{0}]", Tag);
-            //Add the Deals to the email body
-            foreach (Deal _Deal in _User.DealsForUser)
-                Body += string.Format("\r\n{0}\r\n{1}\r\n", _Deal.Title, _Deal.Url);
+            string body = "", subject = _mainForm.Settings.EmailSubject;
+            subject = user.TriggerTags.Aggregate(subject, (current, tag) => current + $"[{tag}]");
+            body = user.DealsForUser.Aggregate(body, (current, deal) => current + $"\r\n{deal.Title}\r\n{deal.Url}\r\n");
 
-            //Assign stuff
-            Message.Body = Body;
-            Message.Subject = Subject;
+            message.Body = body;
+            message.Subject = subject;
 
-            //Create an SMTP Client 
-            //?? May this cause any exceptions? as in does the SMTP client creation do something before i ask the client to send a message?
-            SmtpClient Client = new SmtpClient
+            var client = new SmtpClient
             {
-                Host = MainForm.Settings.SMTPHost,
-                Port = MainForm.Settings.Port,
+                Host = _mainForm.Settings.SmtpHost,
+                Port = _mainForm.Settings.Port,
                 EnableSsl = true,
                 DeliveryMethod = SmtpDeliveryMethod.Network,
                 UseDefaultCredentials = false,
-                Credentials = new NetworkCredential(MainForm.Settings.Email, MainForm.Settings.Password)
+                Credentials = new NetworkCredential(_mainForm.Settings.Email, _mainForm.Settings.Password)
             };
 
             try
-            {//Possible Problems: No internet connection / Broken Credentials / SMTP Host down 
-                Client.Send(Message);
-                MainForm.Log("Sent Email to: {0}, Email Subject: {1}", _User.Email, Subject);
+            {
+                client.Send(message);
             }
             catch (Exception ex)
             {
-                MainForm.Log("Unable to send an email", LogMessageType.Warning);
-                MainForm.Log("StackTrace: {0}\r\nMessage: {1}\r\nSetup: \r\nEmail: {2}\r\nPassword: {3}\r\nSMTPHost: {4}\r\nSMTPPort: {5}.", LogMessageType.DebugLog,
-                                ex.StackTrace, ex.Message, MainForm.Settings.Email, MainForm.Settings.Password, MainForm.Settings.SMTPHost, MainForm.Settings.Port);
+                Logger.CurrentLogger.Log($"Failed to send a message to {user.Email}", LogType.Error);
+                _mainForm.LogException(ex);
             }
-            //Cleanup
-            _User.TriggerTags.Clear();
-            _User.DealsForUser.Clear();
-
+            user.TriggerTags.Clear();
+            user.DealsForUser.Clear();
         }
     }
 }

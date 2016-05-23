@@ -1,96 +1,76 @@
-﻿using MahApps.Metro.Controls;
+﻿#region
+
 using System;
-using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+using MahApps.Metro.Controls;
 
-namespace OzBargainTracker
+#endregion
+
+namespace OzBargainTracker.Forms
 {
-    /// <summary>
-    /// Interaction logic for Settings.xaml
-    /// </summary>
     public partial class MoreWindow : MetroWindow
     {
-        bool Reloaded = false;
-        TrackerMain MainForm;
-        /// <summary>
-        /// Default constructor for this form
-        /// </summary>
-        /// <param name="MainForm">Reference to the Main Form, used for Logs and Settings</param>
-        public MoreWindow(TrackerMain MainForm)
+        private readonly TrackerMain _mainForm;
+        private bool _reloaded;
+
+        public MoreWindow(TrackerMain mainForm)
         {
-            this.MainForm = MainForm;
+            _mainForm = mainForm;
             InitializeComponent();
-            Icon = BitmapFrame.Create(new Uri(Utils.StartupLocation + @"\Icon.png"));
+            Icon = Properties.Resources.IconPng.ToBitmapImage();
         }
-        /// <summary>
-        /// Method that reloads the settings into this form
-        /// </summary>
+
         public void Reload()
         {
-            this.VersionLbl.Content = TrackerMain.AppVersion;
-            this.WebsiteTbx.Text = MainForm.Settings.Website;
-            this.EmailTbx.Text = MainForm.Settings.Email;
-            this.PasswordTbx.Text = MainForm.Settings.Password;
-            this.SMTPHostTbx.Text = MainForm.Settings.SMTPHost;
-            this.EmailSubjectTbx.Text = MainForm.Settings.EmailSubject;
-            this.PortNUD.Value = MainForm.Settings.Port;
-            this.LogTimeChk.IsChecked = MainForm.Settings.LogShowTime;
-            Reloaded = true;
+            VersionLbl.Content = TrackerMain.AppVersion;
+            WebsiteTbx.Text = _mainForm.Settings.Website;
+            EmailTbx.Text = _mainForm.Settings.Email;
+            PasswordTbx.Text = _mainForm.Settings.Password;
+            SMTPHostTbx.Text = _mainForm.Settings.SmtpHost;
+            EmailSubjectTbx.Text = _mainForm.Settings.EmailSubject;
+            PortNUD.Value = _mainForm.Settings.Port;
+            LogTimeChk.IsChecked = _mainForm.Settings.LogShowTime;
+            _reloaded = true;
         }
-        /// <summary>
-        /// An overide for the Show method, which should show the form but now also Reloads the settings into the form before showing it
-        /// </summary>
-        public virtual void Show()
+
+        public new virtual void Show()
         {
             Reload();
             base.Show();
         }
-        /// <summary>
-        /// Saves the Settings from this form into the Settings Class and calls the Settings Class's method of saving those settings
-        /// </summary>
+
         public void Save()
         {
-            if (this.IsInitialized && Reloaded)
-            {
-                MainForm.Settings.Website = this.WebsiteTbx.Text;
-                MainForm.Settings.Email = this.EmailTbx.Text;
-                MainForm.Settings.Password = this.PasswordTbx.Text;
-                MainForm.Settings.SMTPHost = this.SMTPHostTbx.Text;
-                MainForm.Settings.EmailSubject = this.EmailSubjectTbx.Text;
-                MainForm.Settings.Port = (int)(this.PortNUD.Value);
-                MainForm.Settings.LogShowTime = (bool)(this.LogTimeChk.IsChecked);
-                MainForm.Settings.Save();
-                Reloaded = false;
-                Reload();
-            }
+            if (!IsInitialized || !_reloaded) return;
+            _mainForm.Settings.Website = WebsiteTbx.Text;
+            _mainForm.Settings.Email = EmailTbx.Text;
+            _mainForm.Settings.Password = PasswordTbx.Text;
+            _mainForm.Settings.SmtpHost = SMTPHostTbx.Text;
+            _mainForm.Settings.EmailSubject = EmailSubjectTbx.Text;
+            _mainForm.Settings.Port = (int) (PortNUD.Value);
+            _mainForm.Settings.LogShowTime = (bool) (LogTimeChk.IsChecked);
+            _mainForm.Settings.Save();
+            _reloaded = false;
+            Reload();
         }
-        //Donate
+
         private void DonateBtn_Click(object sender, RoutedEventArgs e)
         {
             Process.Start("https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=HKWZZE6933B48");
         }
 
-        //Github
         private void GithubBtn_Click(object sender, RoutedEventArgs e)
         {
-            Process.Start("https://github.com/TheMrNobody/OzBargainTracker");
+            Process.Start("https://github.com/AntonSidorov/OzBargainTracker");
         }
 
-        private void MetroWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        private void MetroWindow_Closing(object sender, CancelEventArgs e)
         {
             e.Cancel = true;
-            this.Visibility = System.Windows.Visibility.Hidden;
+            Visibility = Visibility.Hidden;
         }
 
         private void LogTimeChk_Checked(object sender, RoutedEventArgs e)
@@ -130,13 +110,12 @@ namespace OzBargainTracker
 
         private void MetroWindow_Activated(object sender, EventArgs e)
         {
-            Icon = BitmapFrame.Create(new Uri(Utils.StartupLocation + @"\Icon.png"));
+            Icon = Properties.Resources.IconPng.ToBitmapImage();
         }
 
         private void MetroWindow_Deactivated(object sender, EventArgs e)
         {
-            Icon = BitmapFrame.Create(new Uri(Utils.StartupLocation + @"\Icon2.png"));
+            Icon = Properties.Resources.IconGreyPng.ToBitmapImage();
         }
-
     }
 }

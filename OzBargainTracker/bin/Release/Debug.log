@@ -1,17 +1,13 @@
-[13/12/2014 5:37:22 PM] [Debug] Setting up the Custom Classes
-
-[13/12/2014 5:37:22 PM] [Debug] Setup part 1 finished
-
-[13/12/2014 5:37:22 PM] [Debug] Loading Accounts and Settings
-
-[13/12/2014 5:37:23 PM] [Debug] Exception occured and was handled, info about the exception: 
-StackTrace:    at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+22/05/2016 12:20:38 AM: [Debug] Initializing...
+22/05/2016 12:20:38 AM: [Debug] An exception occured, but was (most likely) handled.
+ Message: Could not find file 'D:\OneDrive\Documents\Programming\Projects\Git\OzBargainTracker 2\OzBargainTracker\bin\Release\Accounts.xml'.
+ InnerException: 
+ Stack Trace:    at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
    at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
-   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy)
    at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize)
+   at System.Xml.XmlDownloadManager.GetStream(Uri uri, ICredentials credentials, IWebProxy proxy, RequestCachePolicy cachePolicy)
    at System.Xml.XmlUrlResolver.GetEntity(Uri absoluteUri, String role, Type ofObjectToReturn)
    at System.Xml.XmlTextReaderImpl.OpenUrlDelegate(Object xmlResolver)
-   at System.Threading.CompressedStack.runTryCode(Object userData)
    at System.Runtime.CompilerServices.RuntimeHelpers.ExecuteCodeWithGuaranteedCleanup(TryCode code, CleanupCode backoutCode, Object userData)
    at System.Threading.CompressedStack.Run(CompressedStack compressedStack, ContextCallback callback, Object state)
    at System.Xml.XmlTextReaderImpl.OpenUrl()
@@ -19,93 +15,5 @@ StackTrace:    at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFull
    at System.Xml.XmlLoader.Load(XmlDocument doc, XmlReader reader, Boolean preserveWhitespace)
    at System.Xml.XmlDocument.Load(XmlReader reader)
    at System.Xml.XmlDocument.Load(String filename)
-   at OzBargainTracker.AppSettings.Load(String SettingsLocation) in d:\Documents\OneDrive\Documents\IT\Projects\Private\OzBargainTracker\OzBargainTracker\Classes\AppSettings.cs:line 59
-Message: Could not find file 'D:\Documents\OneDrive\Documents\IT\Projects\Private\OzBargainTracker\OzBargainTracker\bin\Release\Settings.xml'.
-
-
-[13/12/2014 5:37:23 PM] [Debug] Loading Accounts...
-
-[13/12/2014 5:37:23 PM] [Debug] Account info Updated
-
-[13/12/2014 5:37:23 PM] [Debug] Loading Accounts...
-
-[13/12/2014 5:37:23 PM] [Debug] Loaded Account: Someone@example.com, Tags: Please insert your tags here with a space in between each.
-
-[13/12/2014 5:37:23 PM] [Debug] Accounts Loaded
-
-[13/12/2014 5:37:23 PM] [Debug] Exception occured and was handled, info about the exception: 
-StackTrace:    at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
-   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
-   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy)
-   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize)
-   at System.Xml.XmlUrlResolver.GetEntity(Uri absoluteUri, String role, Type ofObjectToReturn)
-   at System.Xml.XmlTextReaderImpl.OpenUrlDelegate(Object xmlResolver)
-   at System.Threading.CompressedStack.runTryCode(Object userData)
-   at System.Runtime.CompilerServices.RuntimeHelpers.ExecuteCodeWithGuaranteedCleanup(TryCode code, CleanupCode backoutCode, Object userData)
-   at System.Threading.CompressedStack.Run(CompressedStack compressedStack, ContextCallback callback, Object state)
-   at System.Xml.XmlTextReaderImpl.OpenUrl()
-   at System.Xml.XmlTextReaderImpl.Read()
-   at System.Xml.XmlLoader.Load(XmlDocument doc, XmlReader reader, Boolean preserveWhitespace)
-   at System.Xml.XmlDocument.Load(XmlReader reader)
-   at System.Xml.XmlDocument.Load(String filename)
-   at OzBargainTracker.AccountsSetup.Reload(String AccountsXMLDoc) in d:\Documents\OneDrive\Documents\IT\Projects\Private\OzBargainTracker\OzBargainTracker\Forms\AccountsSetup.xaml.cs:line 59
-Message: Could not find file 'D:\Documents\OneDrive\Documents\IT\Projects\Private\OzBargainTracker\OzBargainTracker\bin\Release\Accounts.xml'.
-
-
-[13/12/2014 5:37:23 PM] [Debug] Tracker Setup finished...Starting up
-
-[13/12/2014 5:37:23 PM] [Debug] Start/Stop Button Triggered, causing the tracker to start
-
-[13/12/2014 5:38:33 PM] [Debug] Setting up the Custom Classes
-
-[13/12/2014 5:38:33 PM] [Debug] Setup part 1 finished
-
-[13/12/2014 5:38:33 PM] [Debug] Loading Accounts and Settings
-
-[13/12/2014 5:38:33 PM] [Debug] All 8 Elements from the xml have been loaded
-
-[13/12/2014 5:38:33 PM] [Debug] Loading Accounts...
-
-[13/12/2014 5:38:33 PM] [Debug] Loaded Account: Someone@example.com, Tags: Please insert your tags here with a space in between each.
-
-[13/12/2014 5:38:33 PM] [Debug] Accounts Loaded
-
-[13/12/2014 5:38:33 PM] [Debug] Tracker Setup finished...Starting up
-
-[13/12/2014 5:38:33 PM] [Debug] Start/Stop Button Triggered, causing the tracker to start
-
-[13/12/2014 5:39:27 PM] [Debug] Setting up the Custom Classes
-
-[13/12/2014 5:39:27 PM] [Debug] Setup part 1 finished
-
-[13/12/2014 5:39:27 PM] [Debug] Loading Accounts and Settings
-
-[13/12/2014 5:39:27 PM] [Debug] All 8 Elements from the xml have been loaded
-
-[13/12/2014 5:39:27 PM] [Debug] Loading Accounts...
-
-[13/12/2014 5:39:27 PM] [Debug] Loaded Account: Someone@example.com, Tags: Please insert your tags here with a space in between each.
-
-[13/12/2014 5:39:27 PM] [Debug] Accounts Loaded
-
-[13/12/2014 5:39:27 PM] [Debug] Tracker Setup finished...Starting up
-
-[13/12/2014 5:39:27 PM] [Debug] Start/Stop Button Triggered, causing the tracker to start
-
-[13/12/2014 5:40:18 PM] [Debug] Setting up the Custom Classes
-
-[13/12/2014 5:40:18 PM] [Debug] Setup part 1 finished
-
-[13/12/2014 5:40:18 PM] [Debug] Loading Accounts and Settings
-
-[13/12/2014 5:40:18 PM] [Debug] All 8 Elements from the xml have been loaded
-
-[13/12/2014 5:40:18 PM] [Debug] Loading Accounts...
-
-[13/12/2014 5:40:18 PM] [Debug] Loaded Account: Someone@example.com, Tags: Please insert your tags here with a space in between each.
-
-[13/12/2014 5:40:18 PM] [Debug] Accounts Loaded
-
-[13/12/2014 5:40:18 PM] [Debug] Tracker Setup finished...Starting up
-
-[13/12/2014 5:40:18 PM] [Debug] Start/Stop Button Triggered, causing the tracker to start
+   at OzBargainTracker.Forms.AccountsSetup.Reload(String accountsXmlDoc) in D:\OneDrive\Documents\Programming\Projects\Git\OzBargainTracker 2\OzBargainTracker\Forms\AccountsSetup.xaml.cs:line 39
+22/05/2016 12:20:38 AM: [Debug] Finished Setup.

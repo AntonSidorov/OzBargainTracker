@@ -1,14 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.21005.1
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OzBargainTracker", "OzBargainTracker\OzBargainTracker.csproj", "{6B3A04DC-15F9-432F-9732-5A36B6E517F3}"
-	ProjectSection(ProjectDependencies) = postProject
-		{F9CED81D-807F-439C-863E-B4E9EFCD949D} = {F9CED81D-807F-439C-863E-B4E9EFCD949D}
-	EndProjectSection
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrackerBuilder", "TrackerBuilder\TrackerBuilder.csproj", "{F9CED81D-807F-439C-863E-B4E9EFCD949D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,12 +18,6 @@ Global
 		{6B3A04DC-15F9-432F-9732-5A36B6E517F3}.PortableRelease|Any CPU.Build.0 = PortableRelease|Any CPU
 		{6B3A04DC-15F9-432F-9732-5A36B6E517F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6B3A04DC-15F9-432F-9732-5A36B6E517F3}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F9CED81D-807F-439C-863E-B4E9EFCD949D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F9CED81D-807F-439C-863E-B4E9EFCD949D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F9CED81D-807F-439C-863E-B4E9EFCD949D}.PortableRelease|Any CPU.ActiveCfg = Release|Any CPU
-		{F9CED81D-807F-439C-863E-B4E9EFCD949D}.PortableRelease|Any CPU.Build.0 = Release|Any CPU
-		{F9CED81D-807F-439C-863E-B4E9EFCD949D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F9CED81D-807F-439C-863E-B4E9EFCD949D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
